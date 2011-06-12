@@ -10,7 +10,7 @@ namespace WorkTimer
         private const string TimeFormat = "H:mm";
         private readonly CultureInfo _currentCultureInfo = new CultureInfo("de-DE");
         
-        private readonly IClock _clock;
+        private readonly IClock _clock; // unit testing
 
         #endregion
 
@@ -58,9 +58,14 @@ namespace WorkTimer
 
         public WorkTime(IClock clock, string startTimeString)
         {
-            _clock = clock;
+            _clock = clock; // unit testing 
+
             var validStartTime = ValidateStartTime(startTimeString);
-            CalcTimes(InitStartTime(validStartTime));
+            var startTime = InitStartTime(validStartTime);
+            if (IsStartTimeInFuture(startTime)) {
+                throw new ArgumentException("Invalid start time!");
+            }
+            CalcTimes(startTime);
         }
 
         #endregion
@@ -76,11 +81,20 @@ namespace WorkTimer
             throw new ArgumentException("Invalid start time!");
         }
 
+        /// <summary>
+        /// "Merge" with "_clock" (used for unit testing...)
+        /// </summary>
         private DateTime InitStartTime(DateTime startTime)
         {
             return new DateTime(_clock.Now.Year, _clock.Now.Month, _clock.Now.Day, startTime.Hour,
                                 startTime.Minute, startTime.Second);
         }
+
+        private bool IsStartTimeInFuture(DateTime initStartTime)
+        {
+            return initStartTime > _clock.Now;
+        }
+
 
         private void CalcTimes(DateTime startTime)
         {

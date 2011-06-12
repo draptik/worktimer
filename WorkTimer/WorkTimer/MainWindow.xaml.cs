@@ -116,6 +116,7 @@ namespace WorkTimer
         {
             if (WarnIfMaxTimeReached(workTime)) {
                 gbTimes.Background = new SolidColorBrush(_warnBackgroundColor);
+                tbMaxTimeRemaining.Background = new SolidColorBrush(_warnBackgroundColor);
             }
             else {
                 gbTimes.Background = _defaultBackground;
