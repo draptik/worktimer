@@ -1,0 +1,12 @@
+
+
+*.log
+*.dat
+*.suo
+*.docstates
+*.user
+bin/
+obj/
+_Resharper*
+*.vs10x
+
