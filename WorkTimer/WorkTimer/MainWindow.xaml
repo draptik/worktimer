@@ -8,7 +8,7 @@
         <TextBox Height="23" HorizontalAlignment="Left" Margin="158,48,0,0" Name="tbTimeTarget" VerticalAlignment="Top" Width="60" IsReadOnly="True" TextAlignment="Right" />
         <Label Content="Gehen (normal):" Height="28" HorizontalAlignment="Left" Margin="12,46,0,0" Name="lbTimeTarget" VerticalAlignment="Top" />
         <Button Content="Start" Height="23" HorizontalAlignment="Left" Margin="12,276,0,0" Name="btnUpdate" VerticalAlignment="Top" Width="75" Click="btnUpdate_Click" />
-        <Button Content="Stop" Height="23" HorizontalAlignment="Left" Margin="100,276,0,0" Name="btnStop" VerticalAlignment="Top" Width="75" Click="btnStop_Click" />
+        <Button Content="Stop" Height="23" HorizontalAlignment="Left" Margin="100,276,0,0" Name="btnStop" VerticalAlignment="Top" Width="75" Click="btnStop_Click" IsEnabled="False" />
         <Button Content="Exit" Height="23" HorizontalAlignment="Left" Margin="400,276,0,0" Name="btnExit" VerticalAlignment="Top" Width="75" Click="btnExit_Click" />
         <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="158,82,0,0" Name="tbTimeTargetRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" />
         <Label Content="Restzeit (normal):" Height="28" HorizontalAlignment="Left" Margin="12,80,0,0" Name="lbTimeTargetRemaining" VerticalAlignment="Top" />

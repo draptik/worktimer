@@ -24,6 +24,20 @@ namespace WorkTimer
         public string RemainingTillTargetString { get { return RemainingTillTarget.ToDisplayString(); } }
 
         public TimeSpan TimeSpent { get; private set; }
+        public TimeSpan Balance
+        {
+            get
+            {
+                var result = -RemainingTillTarget;
+                if (TimeSpent.TotalHours > 6 && TimeSpent.TotalHours < 6.75) {
+                    result = new TimeSpan(-2, 0, 0);
+                }
+                else if (TimeSpent >= new TimeSpan(10, 45, 0)) {
+                    result = new TimeSpan(2, 0, 0);
+                }
+                return result;
+            }
+        }
 
         public DateTime MinTimeStart { get { return StartTime.AddHours(6); } }
         public DateTime MinTimeEnd { get { return StartTime.AddHours(6).AddMinutes(45); } }

@@ -166,6 +166,60 @@ namespace WorkTimer.Test
         }
 
         #endregion
+
+        #region Balance
+
+        [Test]
+        public void Balance_UnderMinTimeStart()
+        {
+            // current time: 10:00
+            IClock workedTooShort = new StaticClock(new DateTime(2011, 06, 10, 10, 0, 0));
+            var workTime = new WorkTime(workedTooShort, "8:00");
+            var minusTime = new TimeSpan(-6, -45, 0);
+            Assert.AreEqual(minusTime, workTime.Balance);
+        }
+
+        [Test]
+        public void Balance_UnderMinTimeEnd()
+        {
+            // current time: 14:30
+            IClock workedTooShort = new StaticClock(new DateTime(2011, 06, 10, 14, 30, 0));
+            var workTime = new WorkTime(workedTooShort, "8:00");
+            var minusTime = new TimeSpan(-2, 0, 0);
+            Assert.AreEqual(minusTime, workTime.Balance);
+        }
+
+        [Test]
+        public void Balance_UnderTargetTime()
+        {
+            // current time: 15:30
+            IClock workedTooShort = new StaticClock(new DateTime(2011, 06, 10, 15, 30, 0));
+            var workTime = new WorkTime(workedTooShort, "8:00");
+            var minusTime = new TimeSpan(-1, -15, 0);
+            Assert.AreEqual(minusTime, workTime.Balance);
+        }
+
+        [Test]
+        public void Balance_AboveTargetTime()
+        {
+            // current time: 18:30
+            IClock workedTooShort = new StaticClock(new DateTime(2011, 06, 10, 18, 30, 0));
+            var workTime = new WorkTime(workedTooShort, "8:00");
+            var minusTime = new TimeSpan(1, 45, 0);
+            Assert.AreEqual(minusTime, workTime.Balance);
+        }
+
+        [Test]
+        public void Balance_AboveMaxTime()
+        {
+            // current time: 19:30
+            IClock workedTooShort = new StaticClock(new DateTime(2011, 06, 10, 19, 30, 0));
+            var workTime = new WorkTime(workedTooShort, "8:00");
+            var minusTime = new TimeSpan(2, 0, 0);
+            Assert.AreEqual(minusTime, workTime.Balance);
+        }
+
+        #endregion
     }
 
 }
