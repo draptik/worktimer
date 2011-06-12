@@ -6,7 +6,8 @@ namespace WorkTimer
     {
         public static string ToDisplayString(this TimeSpan timeSpan)
         {
-            return string.Format("{0:00}:{1:00}:{2:00}", timeSpan.TotalHours, timeSpan.Minutes, timeSpan.Seconds);
+
+            return string.Format("{0:00}:{1:00}:{2:00}", timeSpan.Hours, Math.Abs(timeSpan.Minutes), Math.Abs(timeSpan.Seconds));
         }
 
         public static bool IsNullOrEmpty(this string s)
