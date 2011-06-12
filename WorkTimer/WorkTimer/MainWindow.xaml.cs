@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace WorkTimer
@@ -12,6 +13,11 @@ namespace WorkTimer
         DispatcherTimer _dispatcherTimer;
         private const string TitleString = "Should I Stay Or Should I Go Now";
 
+        private readonly TimeSpan _warningTimeSpanMax = new TimeSpan(0, 30, 0);
+        private readonly Color _warnBackgroundColor = Colors.LightPink;
+        private readonly Color _warnForgroundColor = Colors.Red;
+        private Brush _defaultBackground;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -22,6 +28,7 @@ namespace WorkTimer
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ucProgress.Init();
+            _defaultBackground = gbTimes.Background;
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -70,6 +77,19 @@ namespace WorkTimer
 
             var workTime = new WorkTime(tbTimeStart.Text);
 
+            UpdateTextBoxes(workTime);
+            UpdateProgressGui(workTime);
+            UpdateTitle(workTime);
+            UpdateWarnings(workTime);
+        }
+
+        private bool WarnIfMaxTimeReached(WorkTime workTime)
+        {
+            return workTime.RemainingTillMaxTime < _warningTimeSpanMax;
+        }
+
+        private void UpdateTextBoxes(WorkTime workTime)
+        {
             tbTimeTarget.Text = workTime.TargetTime.ToShortTimeString();
             tbTimeTargetRemaining.Text = workTime.RemainingTillTarget.ToDisplayString();
 
@@ -80,11 +100,29 @@ namespace WorkTimer
             tbMaxTimeRemaining.Text = workTime.RemainingTillMaxTime.ToDisplayString();
 
             tbBalance.Text = workTime.Balance.ToDisplayString();
-            
+        }
+        
+        private void UpdateProgressGui(WorkTime workTime)
+        {
             ucProgress.UpdateCurrentPos(workTime.TimeSpent);
+        }
 
+        private void UpdateTitle(WorkTime workTime)
+        {
             Title = string.Format("{0} ({1})", TitleString, workTime.Balance.ToDisplayString());
         }
+
+        private void UpdateWarnings(WorkTime workTime)
+        {
+            if (WarnIfMaxTimeReached(workTime)) {
+                gbTimes.Background = new SolidColorBrush(_warnBackgroundColor);
+            }
+            else {
+                gbTimes.Background = _defaultBackground;
+            }
+        }
+
+        
 
         private bool IsValidStartTime()
         {

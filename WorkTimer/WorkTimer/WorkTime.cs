@@ -34,6 +34,9 @@ namespace WorkTimer
                 else if (TimeSpent >= new TimeSpan(10, 45, 0)) {
                     result = new TimeSpan(2, 0, 0);
                 }
+                else if (TimeSpent.TotalHours <= 6) {
+                    result = -RemainingTillTarget.Subtract(new TimeSpan(0, 45, 0));
+                }
                 return result;
             }
         }

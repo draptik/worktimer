@@ -14,7 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Row="0" Header="Zeiten" Height="130" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="579" >
+        <GroupBox Grid.Row="0" Header="Zeiten" Height="130" HorizontalAlignment="Left" Margin="12,12,0,0" Name="gbTimes" VerticalAlignment="Top" Width="579">
             <Grid>
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="120,8,0,0" Name="tbTimeStart" VerticalAlignment="Top" Width="60" HorizontalContentAlignment="Right" IsTabStop="True" />
                 <Label Content="Startzeit (HH:MM):" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lbTimeStart" VerticalAlignment="Top" />

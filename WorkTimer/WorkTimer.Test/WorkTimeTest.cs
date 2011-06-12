@@ -175,7 +175,17 @@ namespace WorkTimer.Test
             // current time: 10:00
             IClock workedTooShort = new StaticClock(new DateTime(2011, 06, 10, 10, 0, 0));
             var workTime = new WorkTime(workedTooShort, "8:00");
-            var minusTime = new TimeSpan(-6, -45, 0);
+            var minusTime = new TimeSpan(-6, 0, 0);
+            Assert.AreEqual(minusTime, workTime.Balance);
+        }
+
+        [Test]
+        public void Balance_UnderMinTimeStart_JustStarted()
+        {
+            // current time: 8:15
+            IClock workedTooShort = new StaticClock(new DateTime(2011, 06, 10, 8, 15, 0));
+            var workTime = new WorkTime(workedTooShort, "8:00");
+            var minusTime = new TimeSpan(-7, -45, 0);
             Assert.AreEqual(minusTime, workTime.Balance);
         }
 
