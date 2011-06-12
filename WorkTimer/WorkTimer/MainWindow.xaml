@@ -4,7 +4,7 @@
         xmlns:WorkTimer="clr-namespace:WorkTimer" 
         Title="Should I Stay Or Should I Go Now..." 
         Height="350" 
-        Width="525" Loaded="Window_Loaded">
+        Width="625" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="160" ></RowDefinition>
@@ -13,28 +13,33 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Row="0" Header="Zeiten" Height="130" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="479" >
+        <GroupBox Grid.Row="0" Header="Zeiten" Height="130" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="579" >
             <Grid>
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="152,8,0,0" Name="tbTimeStart" VerticalAlignment="Top" Width="60" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="120,8,0,0" Name="tbTimeStart" VerticalAlignment="Top" Width="60" HorizontalContentAlignment="Right" IsTabStop="True" />
                 <Label Content="Startzeit (HH:MM):" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lbTimeStart" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="152,42,0,0" Name="tbTimeTarget" VerticalAlignment="Top" Width="60" IsReadOnly="True" TextAlignment="Right" />
-                <Label Content="Gehen (normal):" Height="28" HorizontalAlignment="Left" Margin="6,40,0,0" Name="lbTimeTarget" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="152,76,0,0" Name="tbTimeTargetRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" />
-                <Label Content="Restzeit (normal):" Height="28" HorizontalAlignment="Left" Margin="6,74,0,0" Name="lbTimeTargetRemaining" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="120,42,0,0" Name="tbTimeTarget" VerticalAlignment="Top" Width="60" IsReadOnly="True" TextAlignment="Right" IsTabStop="False" />
+                <Label Content="Gehen (normal):" Height="28" HorizontalAlignment="Left" Margin="19,40,0,0" Name="lbTimeTarget" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="120,76,0,0" Name="tbTimeTargetRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
+                <Label Content="Restzeit (normal):" Height="28" HorizontalAlignment="Left" Margin="12,74,0,0" Name="lbTimeTargetRemaining" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="276,8,0,0" Name="tbBalance" VerticalAlignment="Top" Width="60" IsReadOnly="True" IsTabStop="False" />
+                <Label Content="Saldo:" Height="28" HorizontalAlignment="Left" Margin="228,8,0,0" Name="lbBalance" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="276,42,0,0" Name="tbMinTime" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
+                <Label Content="Gehen (min):" Height="28" HorizontalAlignment="Left" Margin="192,0,0,39" Name="lbMinTime" VerticalAlignment="Bottom" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="276,76,0,0" Name="tbMinTimeRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
+                <Label Content="Restzeit (min):" Height="28" HorizontalAlignment="Left" Margin="186,74,0,0" Name="lbMinTimeRemaining" VerticalAlignment="Top" />
+                <TextBox HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="432,42,0,42" Name="tbMaxTime" Width="60" IsReadOnly="True" IsTabStop="False" />
+                <Label Content="Gehen (max):" Height="28" HorizontalAlignment="Left" Margin="349,40,0,0" Name="lbMaxTime" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="432,76,0,0" Name="tbMaxTimeRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
+                <Label Content="Restzeit (max):" Height="28" HorizontalAlignment="Left" Margin="342,74,0,0" Name="lbMaxTimeRemaining" VerticalAlignment="Top" />
             </Grid>
         </GroupBox>
-        <!--<Rectangle Height="36" HorizontalAlignment="Left" Margin="63,157,0,0" Name="rctMain" Stroke="Black" VerticalAlignment="Top" Width="400" />
-        <Rectangle Height="36" HorizontalAlignment="Left" Margin="63,157,0,0" Name="rctCurrent" Stroke="Black" VerticalAlignment="Top" Width="0" Fill="Yellow" />
-        <Rectangle Height="36" HorizontalAlignment="Left" Margin="363,157,0,0" Name="rctMin" Stroke="Black" VerticalAlignment="Top" Width="20" Fill="LightBlue" />
-        <Line Stroke="Green" StrokeThickness="4" X1="400" Y1="157" X2="400" Y2="193" Name="lineTagerTime" />-->
 
         <WorkTimer:WorkProgressUserControl x:Name="ucProgress" Grid.Row="1" Grid.ColumnSpan="2" />
 
         <Button Grid.Row="2" Content="Start" Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="btnUpdate" VerticalAlignment="Top" Width="75" Click="btnUpdate_Click" />
         <Button Grid.Row="2" Content="Stop" Height="23" HorizontalAlignment="Left" Margin="100,0,0,0" Name="btnStop" VerticalAlignment="Top" Width="75" Click="btnStop_Click" IsEnabled="False" />
-        <Button Grid.Row="2" Content="Exit" Height="23" HorizontalAlignment="Left" Margin="400,0,0,0" Name="btnExit" VerticalAlignment="Top" Width="75" Click="btnExit_Click" />
+        <Button Grid.Row="2" Content="Exit" Height="23" HorizontalAlignment="Left" Margin="500,0,0,0" Name="btnExit" VerticalAlignment="Top" Width="75" Click="btnExit_Click" />
 
     </Grid>
 </Window>

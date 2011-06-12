@@ -21,7 +21,6 @@ namespace WorkTimer
         public TimeSpan TargetTimeSpan { get { return new TimeSpan(8, 45, 0); } }
 
         public TimeSpan RemainingTillTarget { get; private set; }
-        public string RemainingTillTargetString { get { return RemainingTillTarget.ToDisplayString(); } }
 
         public TimeSpan TimeSpent { get; private set; }
         public TimeSpan Balance

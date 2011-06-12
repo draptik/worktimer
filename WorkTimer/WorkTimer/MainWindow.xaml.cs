@@ -10,6 +10,7 @@ namespace WorkTimer
     public partial class MainWindow : Window
     {
         DispatcherTimer _dispatcherTimer;
+        private const string TitleString = "Should I Stay Or Should I Go Now";
 
         public MainWindow()
         {
@@ -68,10 +69,21 @@ namespace WorkTimer
             }
 
             var workTime = new WorkTime(tbTimeStart.Text);
-            tbTimeTarget.Text = workTime.TargetTime.ToShortTimeString();
-            tbTimeTargetRemaining.Text = workTime.RemainingTillTargetString;
 
+            tbTimeTarget.Text = workTime.TargetTime.ToShortTimeString();
+            tbTimeTargetRemaining.Text = workTime.RemainingTillTarget.ToDisplayString();
+
+            tbMinTime.Text = workTime.MinTimeStart.ToShortTimeString();
+            tbMinTimeRemaining.Text = workTime.RemainingTillMinTime.ToDisplayString();
+
+            tbMaxTime.Text = workTime.MaxTime.ToShortTimeString();
+            tbMaxTimeRemaining.Text = workTime.RemainingTillMaxTime.ToDisplayString();
+
+            tbBalance.Text = workTime.Balance.ToDisplayString();
+            
             ucProgress.UpdateCurrentPos(workTime.TimeSpent);
+
+            Title = string.Format("{0} ({1})", TitleString, workTime.Balance.ToDisplayString());
         }
 
         private bool IsValidStartTime()
