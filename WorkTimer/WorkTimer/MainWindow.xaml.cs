@@ -18,6 +18,10 @@ namespace WorkTimer
 
         #region GUI Events
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ucProgress.Init();
+        }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -29,7 +33,6 @@ namespace WorkTimer
             StartDispatcher();
             ToggleStartStopButtons();
         }
-
         
 
         void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -68,7 +71,7 @@ namespace WorkTimer
             tbTimeTarget.Text = workTime.TargetTime.ToShortTimeString();
             tbTimeTargetRemaining.Text = workTime.RemainingTillTargetString;
 
-            UpdateCurrentPos(workTime.TimeSpent);
+            ucProgress.UpdateCurrentPos(workTime.TimeSpent);
         }
 
         private bool IsValidStartTime()
@@ -85,38 +88,6 @@ namespace WorkTimer
         {
             btnUpdate.IsEnabled = !_dispatcherTimer.IsEnabled;
             btnStop.IsEnabled = _dispatcherTimer.IsEnabled;
-        }
-
-
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            var zeroPosX = rctMain.Margin.Left;
-            
-            // Target time
-            const double targetTime = 8.0;
-            var targetPos = GetPos(targetTime);
-
-            lineTagerTime.X1 = zeroPosX + targetPos;
-            lineTagerTime.X2 = zeroPosX + targetPos;
-
-            // Min times
-            const double minTimeStart = 6.0;
-            rctMin.Margin = new Thickness(zeroPosX + GetPos(minTimeStart), rctMin.Margin.Top, rctMin.Margin.Right, rctMin.Margin.Bottom);
-            rctMin.Width = GetPos(0.75);
-        }
-
-        private void UpdateCurrentPos(TimeSpan timeSpent)
-        {
-            var currentPos = GetPos(timeSpent.TotalMinutes/60.0);
-            rctCurrent.Width = currentPos;
-        }
-
-        private double GetPos(double d)
-        {
-            var maxPos = rctMain.Width;
-            const double maxTime = 10.75;
-            return Math.Round(maxPos/maxTime*d, 2, MidpointRounding.AwayFromZero);
         }
 
     }
