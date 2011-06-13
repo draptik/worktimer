@@ -10,7 +10,14 @@ namespace WorkTimer
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer _dispatcherTimer;
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        #region Fields
+        
+        private DispatcherTimer _dispatcherTimer;
         private const string TitleString = "Should I Stay Or Should I Go Now";
 
         private readonly TimeSpan _warningTimeSpanMax = new TimeSpan(0, 30, 0);
@@ -18,11 +25,8 @@ namespace WorkTimer
         private readonly Color _warnForgroundColor = Colors.Red;
         private Brush _defaultBackground;
 
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
+        #endregion
+        
         #region GUI Events
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -39,7 +43,6 @@ namespace WorkTimer
             }
 
             StartDispatcher();
-            ToggleStartStopButtons();
         }
         
 
@@ -50,8 +53,7 @@ namespace WorkTimer
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
-            _dispatcherTimer.Stop();
-            ToggleStartStopButtons();
+            StopDispatcher();
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -60,33 +62,31 @@ namespace WorkTimer
         }
 
         #endregion
-        
-        private void StartDispatcher()
-        {
-            _dispatcherTimer = new DispatcherTimer();
-            _dispatcherTimer.Tick += dispatcherTimer_Tick;
-            _dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            _dispatcherTimer.Start();
-        }
+
+        #region Update
 
         private void Update()
         {
-            if (!IsValidStartTime()) {
+            if (!IsValidStartTime())
+            {
                 return;
             }
 
-            var workTime = new WorkTime(tbTimeStart.Text);
+            try
+            {
+                var workTime = new WorkTime(tbTimeStart.Text);
 
-            UpdateTextBoxes(workTime);
-            UpdateProgressGui(workTime);
-            UpdateTitle(workTime);
-            UpdateWarnings(workTime);
+                UpdateTextBoxes(workTime);
+                UpdateProgressGui(workTime);
+                UpdateTitle(workTime);
+                UpdateWarnings(workTime);
+            }
+            catch (Exception)
+            {
+                ShowErrorDlgKillTimer();
+            }
         }
 
-        private bool WarnIfMaxTimeReached(WorkTime workTime)
-        {
-            return workTime.RemainingTillMaxTime < _warningTimeSpanMax;
-        }
 
         private void UpdateTextBoxes(WorkTime workTime)
         {
@@ -101,7 +101,7 @@ namespace WorkTimer
 
             tbBalance.Text = workTime.Balance.ToDisplayString();
         }
-        
+
         private void UpdateProgressGui(WorkTime workTime)
         {
             ucProgress.UpdateCurrentPos(workTime.TimeSpent);
@@ -114,25 +114,59 @@ namespace WorkTimer
 
         private void UpdateWarnings(WorkTime workTime)
         {
-            if (WarnIfMaxTimeReached(workTime)) {
+            if (WarnIfMaxTimeReached(workTime))
+            {
                 gbTimes.Background = new SolidColorBrush(_warnBackgroundColor);
                 tbMaxTimeRemaining.Background = new SolidColorBrush(_warnBackgroundColor);
             }
-            else {
+            else
+            {
                 gbTimes.Background = _defaultBackground;
             }
-        }
-
+        } 
+        #endregion
         
+        #region Warning and Validation
 
         private bool IsValidStartTime()
         {
             return !tbTimeStart.Text.IsNullOrEmpty();
         }
 
+        private bool WarnIfMaxTimeReached(WorkTime workTime)
+        {
+            return workTime.RemainingTillMaxTime < _warningTimeSpanMax;
+        }
+
         private static void ShowErrorDlg()
         {
             MessageBox.Show("Bitte gültige Startzeit eingeben!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void ShowErrorDlgKillTimer()
+        {
+            MessageBox.Show("Startzeit darf nicht in der Zukunft liegen!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            StopDispatcher();
+        } 
+
+        #endregion
+        
+        #region Timer
+        
+        private void StartDispatcher()
+        {
+            _dispatcherTimer = new DispatcherTimer();
+            _dispatcherTimer.Tick += dispatcherTimer_Tick;
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            _dispatcherTimer.Start();
+
+            ToggleStartStopButtons();
+        }
+
+        private void StopDispatcher()
+        {
+            _dispatcherTimer.Stop();
+            ToggleStartStopButtons();
         }
 
         private void ToggleStartStopButtons()
@@ -141,5 +175,6 @@ namespace WorkTimer
             btnStop.IsEnabled = _dispatcherTimer.IsEnabled;
         }
 
+        #endregion
     }
 }
