@@ -68,22 +68,16 @@ namespace WorkTimer
 
         private void Update()
         {
-            if (!IsValidStartTime())
-            {
-                return;
-            }
+            if (!IsValidStartTime()) { return; }
 
-            try
-            {
+            try {
                 var workTime = new WorkTime(tbTimeStart.Text);
-
                 UpdateTextBoxes(workTime);
                 UpdateProgressGui(workTime);
                 UpdateTitle(workTime);
                 UpdateWarnings(workTime);
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 ShowErrorDlgKillTimer();
             }
         }
