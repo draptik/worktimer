@@ -5,10 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="95" d:DesignWidth="420">
-    <Grid>
-        <Rectangle Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" Name="rctMain" Stroke="Black" VerticalAlignment="Top" Width="400" />
-        <Rectangle Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" Name="rctCurrent" Stroke="Black" VerticalAlignment="Top" Width="0" Fill="Yellow" />
-        <Rectangle Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" Name="rctMinTime" Stroke="Black" VerticalAlignment="Top" Width="0" Fill="LightBlue" Visibility="Hidden" />
-        <Rectangle Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" Name="rctTargetTime" Stroke="Green" VerticalAlignment="Top" Width="2" Visibility="Hidden" />
+    <Grid Name="gridMain">
+        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctMain" Stroke="Black" VerticalAlignment="Top" Width="400" />
+        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctCurrent" Stroke="Black" VerticalAlignment="Top" Width="0" Fill="Yellow" />
+        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctMinTime" Stroke="Black" VerticalAlignment="Top" Width="0" Fill="LightBlue" Visibility="Hidden" />
     </Grid>
 </UserControl>
