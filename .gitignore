@@ -5,7 +5,7 @@
 *.suo
 *.docstates
 *.user
-bin/
+WorkTimer/*/bin/
 obj/
 _Resharper*
 *.vs10x
