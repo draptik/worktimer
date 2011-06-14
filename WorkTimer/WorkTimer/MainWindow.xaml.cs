@@ -22,6 +22,7 @@ namespace WorkTimer
 
         private readonly TimeSpan _warningTimeSpanMax = new TimeSpan(0, 30, 0);
         private readonly Color _warnBackgroundColor = Colors.LightPink;
+        private readonly Color _okBackgroundColor = Colors.LightGreen;
         private readonly Color _warnForgroundColor = Colors.Red;
         private Brush _defaultBackground;
 
@@ -109,21 +110,29 @@ namespace WorkTimer
 
         private void UpdateTitle(WorkTime workTime)
         {
-            Title = string.Format("{0} ({1})", TitleString, workTime.Balance.ToDisplayString());
+            Title = string.Format("{0} ({1})", TitleString, workTime.TimeSpent.ToDisplayString());
         }
 
         private void UpdateWarnings(WorkTime workTime)
         {
-            if (WarnIfMaxTimeReached(workTime))
-            {
+            if (WarnIfMaxTimeReached(workTime)) {
                 gbTimes.Background = new SolidColorBrush(_warnBackgroundColor);
                 tbMaxTimeRemaining.Background = new SolidColorBrush(_warnBackgroundColor);
             }
-            else
-            {
+            else {
                 gbTimes.Background = _defaultBackground;
+                tbMaxTimeRemaining.Background = new SolidColorBrush(_okBackgroundColor);
             }
-        } 
+
+            tbTimeTargetRemaining.Background = IsLessThanTargetTime(workTime)
+                                                   ? new SolidColorBrush(_warnBackgroundColor)
+                                                   : new SolidColorBrush(_okBackgroundColor);
+
+            tbMinTimeRemaining.Background = IsLessThanMinTime(workTime)
+                                                ? new SolidColorBrush(_warnBackgroundColor)
+                                                : new SolidColorBrush(_okBackgroundColor);
+        }
+
         #endregion
         
         #region Warning and Validation
@@ -136,6 +145,17 @@ namespace WorkTimer
         private bool WarnIfMaxTimeReached(WorkTime workTime)
         {
             return workTime.RemainingTillMaxTime < _warningTimeSpanMax;
+        }
+
+
+        private static bool IsLessThanMinTime(WorkTime workTime)
+        {
+            return workTime.RemainingTillMinTime.TotalSeconds > 0;
+        }
+
+        private static bool IsLessThanTargetTime(WorkTime workTime)
+        {
+            return workTime.RemainingTillTarget.TotalSeconds > 0;
         }
 
         private static void ShowErrorDlg()
