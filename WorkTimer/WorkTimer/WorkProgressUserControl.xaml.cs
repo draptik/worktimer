@@ -11,6 +11,11 @@ namespace WorkTimer
     /// </summary>
     public partial class WorkProgressUserControl : UserControl
     {
+        private const double BreakTime    = 0.75;
+        private const double TargetTime   = 8.75;
+        private const double MinTimeStart = 6.0;
+        private const double MaxTime      = 10.75;
+
         public WorkProgressUserControl()
         {
             InitializeComponent();
@@ -19,61 +24,63 @@ namespace WorkTimer
         public void Init()
         {
             InitHourLines();
-
-            const double targetTime = 8.75;
-            InitTargetLine(targetTime);
-            
-            const double minTimeStart = 6.0;
-            InitMinTimes(minTimeStart);
+            InitTargetLine(TargetTime);
+            InitMinTimes(MinTimeStart);
         }
+
+        public void UpdateCurrentPos(TimeSpan timeSpent)
+        {
+            var currentPos = GetPos(timeSpent.TotalMinutes / 60.0);
+            rctCurrent.Width = currentPos;
+        }
+
 
         private void InitMinTimes(double minTimeStart)
         {
-            rctMinTime.Margin = SetElementPos(GetPos(minTimeStart), rctMinTime);
-            rctMinTime.Width = GetPos(0.75);
+            rctMinTime.Margin     = SetElementPos(GetPos(minTimeStart), rctMinTime);
+            rctMinTime.Width      = GetPos(BreakTime);
             rctMinTime.Visibility = Visibility.Visible;
         }
 
         private void InitHourLines()
         {
             const int numHours = 10;
-            for (var i = 1; i <= numHours; i++)
-            {
-                var xPos = GetPos(i);
-                var line = AddLine(xPos);
-                var label = AddLabel(i, xPos);
-                gridMain.Children.Add(line);
-                gridMain.Children.Add(label);
+            for (var i = 1; i <= numHours; i++) {
+                var xPos  = GetPos(i);
+                AddLine(xPos);
+                AddLabel(i, xPos);
             }
         }
 
-        private Label AddLabel(int i, double xPos)
+        private void AddLabel(int i, double xPos)
         {
             const double offsetX = 8;
             const double offsetY = 17;
-            return new Label
-                   {
-                       Margin = new Thickness(xPos - offsetX, GetHeightTop()-offsetY, 0, 0),
-                       Content = i.ToString(),
-                       FontSize = 8,
-                       Height = offsetY+5,
-                       VerticalAlignment = VerticalAlignment.Top,
-                   };
+            var label = new Label
+                        {
+                            Margin = new Thickness(xPos - offsetX, GetHeightTop() - offsetY, 0, 0),
+                            Content = i.ToString(),
+                            FontSize = 8,
+                            Height = offsetY + 5,
+                            VerticalAlignment = VerticalAlignment.Top,
+                        };
+            gridMain.Children.Add(label);
         }
 
-        private Line AddLine(double xPos)
+        private void AddLine(double xPos)
         {
-            return new Line
-                   {
-                       Stroke = Brushes.LightSteelBlue,
-                       X1 = xPos,
-                       X2 = xPos,
-                       Y1 = GetHeightTop(),
-                       Y2 = GetHeightBottom(),
-                       StrokeThickness = 1,
-                       StrokeDashArray = new DoubleCollection {2, 2},
-                       Opacity = 50
-                   };
+            var line = new Line
+                       {
+                           Stroke = Brushes.LightSteelBlue,
+                           X1 = xPos,
+                           X2 = xPos,
+                           Y1 = GetHeightTop(),
+                           Y2 = GetHeightBottom(),
+                           StrokeThickness = 1,
+                           StrokeDashArray = new DoubleCollection {2, 2},
+                           Opacity = 50
+                       };
+            gridMain.Children.Add(line);
         }
 
         private void InitTargetLine(double targetTime)
@@ -92,24 +99,6 @@ namespace WorkTimer
         }
         
 
-        public void UpdateCurrentPos(TimeSpan timeSpent)
-        {
-            var currentPos = rctMain.Margin.Left + GetPos(timeSpent.TotalMinutes / 60.0);
-            rctCurrent.Width = currentPos;
-        }
-
-        private double GetPos(double d)
-        {
-            var maxPos = rctMain.Width;
-            const double maxTime = 10.75;
-            return Math.Round(maxPos / maxTime * d, 2, MidpointRounding.AwayFromZero);
-        }
-
-        private static Thickness SetElementPos(double pos, FrameworkElement element)
-        {
-            return new Thickness(pos, element.Margin.Top, element.Margin.Right, element.Margin.Bottom);
-        }
-
         private double GetHeightBottom()
         {
             return rctMain.Margin.Top + rctMain.Height;
@@ -117,6 +106,18 @@ namespace WorkTimer
         private double GetHeightTop()
         {
             return rctMain.Margin.Top;
+        }
+
+        private double GetPos(double d)
+        {
+            var maxPos = rctMain.Width;
+            var zeroPos = rctMain.Margin.Left;
+            return zeroPos + Math.Round(maxPos / MaxTime * d, 2, MidpointRounding.AwayFromZero);
+        }
+
+        private static Thickness SetElementPos(double pos, FrameworkElement element)
+        {
+            return new Thickness(pos, element.Margin.Top, element.Margin.Right, element.Margin.Bottom);
         }
     }
 }
