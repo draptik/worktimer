@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:WorkTimer="clr-namespace:WorkTimer" 
         Title="Should I Stay Or Should I Go Now..." 
-        Height="350" 
+        Height="700" 
         Width="625" 
         Loaded="Window_Loaded" 
         FocusManager.FocusedElement="{Binding ElementName=tbTimeStart}"
@@ -11,7 +11,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="160" ></RowDefinition>
-            <RowDefinition Height="100" ></RowDefinition>
+            <RowDefinition Height="400" ></RowDefinition>
             <RowDefinition Height="30" ></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -39,7 +39,9 @@
         </GroupBox>
 
         <WorkTimer:WorkProgressUserControl x:Name="ucProgress" Grid.Row="1" Grid.ColumnSpan="2" />
-
+        
+        <WorkTimer:AnalogClockUserControl x:Name="ucClock" Grid.Row="1" Grid.ColumnSpan="2" />
+        
         <Button Grid.Row="2" Content="Start" Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="btnUpdate" VerticalAlignment="Top" Width="75" Click="btnUpdate_Click" IsTabStop="True" KeyboardNavigation.TabIndex="1"  />
         <Button Grid.Row="2" Content="Stop" Height="23" HorizontalAlignment="Left" Margin="100,0,0,0" Name="btnStop" VerticalAlignment="Top" Width="75" Click="btnStop_Click" IsEnabled="False" KeyboardNavigation.TabIndex="2"  />
         <Button Grid.Row="2" Content="Exit" Height="23" HorizontalAlignment="Left" Margin="500,0,0,0" Name="btnExit" VerticalAlignment="Top" Width="75" Click="btnExit_Click" KeyboardNavigation.TabIndex="3"  />

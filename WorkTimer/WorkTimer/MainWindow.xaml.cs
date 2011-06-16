@@ -43,9 +43,18 @@ namespace WorkTimer
                 return;
             }
 
+            InitClock();
+
             StartDispatcher();
         }
-        
+
+        private void InitClock()
+        {
+            if (IsValidStartTime()) {
+                ucClock.Init(new WorkTime(tbTimeStart.Text));
+            }
+        }
+
 
         void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -76,10 +85,16 @@ namespace WorkTimer
                 UpdateProgressGui(workTime);
                 UpdateTitle(workTime);
                 UpdateWarnings(workTime);
+                UpdateClock(workTime);
             }
             catch (Exception) {
                 ShowErrorDlgKillTimer();
             }
+        }
+
+        private void UpdateClock(WorkTime workTime)
+        {
+            ucClock.Update(workTime);
         }
 
 
