@@ -41,7 +41,7 @@
         </Rectangle>
 
         <!-- Target time -->
-        <Rectangle Margin="150,80,149,150" Name="rectangleTargetTime" Stroke="Red" StrokeThickness="2">
+        <Rectangle Margin="150,80,149,150" Name="rectangleTargetTime" Stroke="Green" StrokeThickness="2">
             <Rectangle.RenderTransform>
                 <RotateTransform x:Name="TargetTimeRotation" CenterX="0" CenterY="70" Angle="300" />
             </Rectangle.RenderTransform>
@@ -66,17 +66,15 @@
         <Path Stroke="Red" Fill="Yellow" Canvas.Top="50" Canvas.Left="50" Height="200" Width="200" Opacity="0.1">
             <Path.Data>
                 <PathGeometry>
-                    <PathFigure StartPoint="0,100" x:Name="timeSpentStartPoint">
-                        <ArcSegment IsLargeArc="True" 
-                                    Size="50, 50"
-                                    Point="200, 100"
-                                    SweepDirection="Clockwise" x:Name="timeSpentArc" />
+                    <PathFigure StartPoint="100,100">
+                        <PathFigure.Segments>
+                            <LineSegment Point="100,0" x:Name="timeSpentStartOnCircle" />
+                            <ArcSegment IsLargeArc="True" Size="100, 100" Point="200, 100" SweepDirection="Clockwise" x:Name="timeSpentArc" />
+                        </PathFigure.Segments>
                     </PathFigure>
                 </PathGeometry>
             </Path.Data>
-            <Path.RenderTransform>
-                <RotateTransform CenterX="100" CenterY="100" Angle="60" />
-            </Path.RenderTransform>
+            <!--<Path.RenderTransform><RotateTransform CenterX="100" CenterY="100" Angle="60" /></Path.RenderTransform>-->
         </Path>
 
     </Grid>

@@ -24,8 +24,9 @@ namespace WorkTimer
 
         public void Update(WorkTime workTime)
         {
-            // TODO
-            
+            timeSpentStartOnCircle.Point = TransformDate(workTime.StartTime);
+            timeSpentArc.IsLargeArc = workTime.TimeSpent > new TimeSpan(6, 0, 0);
+            timeSpentArc.Point = TransformDate(DateTime.Now);
         }
 
         void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -41,7 +42,8 @@ namespace WorkTimer
         
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            // TODO
+            //throw new NotImplementedException();
         }
 
         public void Init(WorkTime workTime)
@@ -49,9 +51,10 @@ namespace WorkTimer
             if (workTime == null) { return; }
             StartTimeRotation.Angle = GetAngle(workTime.StartTime);
             TargetTimeRotation.Angle = GetAngle(workTime.TargetTime);
-
             InitMinTime(workTime);
         }
+
+        #region MinTime
 
         private void InitMinTime(WorkTime workTime)
         {
@@ -62,16 +65,22 @@ namespace WorkTimer
 
         private void InitMinTimeStart(WorkTime workTime)
         {
-            var x = GetX(workTime.MinTimeStart);
-            var y = GetY(workTime.MinTimeStart);
-            minTimeStartOnCircle.Point = TransformPoint(x, y);
+            minTimeStartOnCircle.Point = TransformDate(workTime.MinTimeStart);
         }
 
         private void InitMinTimeEnd(WorkTime workTime)
         {
-            var x = GetX(workTime.MinTimeEnd);
-            var y = GetY(workTime.MinTimeEnd);
-            minTimeArcSegment.Point = TransformPoint(x, y);
+            minTimeArcSegment.Point = TransformDate(workTime.MinTimeEnd);
+        }
+
+        #endregion
+
+
+        #region Calc Methods
+		
+        private static Point TransformDate(DateTime dateTime)
+        {
+            return TransformPoint(GetXPosRelative(dateTime), GetYPosRelative(dateTime));
         }
 
         private static Point TransformPoint(double x, double y)
@@ -89,12 +98,12 @@ namespace WorkTimer
             return Radius - y;
         }
 
-        private static double GetY(DateTime time)
+        private static double GetYPosRelative(DateTime time)
         {
             return Radius*Math.Cos(GetRadians(time));
         }
 
-        private static double GetX(DateTime time)
+        private static double GetXPosRelative(DateTime time)
         {
             return Radius*Math.Sin(GetRadians(time));
         }
@@ -108,5 +117,7 @@ namespace WorkTimer
         {
             return dateTime.Hour * 30 + dateTime.Minute * 0.5;
         }
+
+        #endregion    
     }
 }
