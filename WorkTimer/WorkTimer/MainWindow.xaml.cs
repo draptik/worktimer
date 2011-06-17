@@ -85,8 +85,7 @@ namespace WorkTimer
         private WindowState _storedWindowState = WindowState.Normal;
         void OnStateChanged(object sender, EventArgs args)
         {
-            if (WindowState == WindowState.Minimized)
-            {
+            if (WindowState == WindowState.Minimized) {
                 Hide();
                 if (TrayIcon != null)
                     TrayIcon.ShowBalloonTip(2000);
@@ -221,6 +220,7 @@ namespace WorkTimer
         {
             TrayIcon.Text = workTime.TimeSpent.ToDisplayString();
         }
+        
         #endregion
         
         #region Warning and Validation

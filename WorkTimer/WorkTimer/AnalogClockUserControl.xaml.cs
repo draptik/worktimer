@@ -49,9 +49,22 @@ namespace WorkTimer
         public void Init(WorkTime workTime)
         {
             if (workTime == null) { return; }
-            StartTimeRotation.Angle = GetAngle(workTime.StartTime);
-            TargetTimeRotation.Angle = GetAngle(workTime.TargetTime);
+
+            InitStartTime(workTime);
+            InitTargetTime(workTime);
             InitMinTime(workTime);
+        }
+
+        private void InitStartTime(WorkTime workTime)
+        {
+            StartTimeRotation.Angle = GetAngle(workTime.StartTime);
+            rectangleStartTime.Visibility = Visibility.Visible;
+        }
+
+        private void InitTargetTime(WorkTime workTime)
+        {
+            TargetTimeRotation.Angle = GetAngle(workTime.TargetTime);
+            rectangleTargetTime.Visibility = Visibility.Visible;
         }
 
         #region MinTime

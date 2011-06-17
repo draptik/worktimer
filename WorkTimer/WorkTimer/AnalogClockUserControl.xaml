@@ -34,14 +34,14 @@
         </Rectangle>
 
         <!-- Start time -->
-        <Rectangle Margin="150,80,149,150" Name="rectangleStartTime" Stroke="Red" StrokeThickness="2">
+        <Rectangle Margin="150,80,149,150" Name="rectangleStartTime" Stroke="Red" StrokeThickness="2" Visibility="Hidden">
             <Rectangle.RenderTransform>
                 <RotateTransform x:Name="StartTimeRotation" CenterX="0" CenterY="70" Angle="100" />
             </Rectangle.RenderTransform>
         </Rectangle>
 
         <!-- Target time -->
-        <Rectangle Margin="150,80,149,150" Name="rectangleTargetTime" Stroke="Green" StrokeThickness="2">
+        <Rectangle Margin="150,80,149,150" Name="rectangleTargetTime" Stroke="Green" StrokeThickness="2" Visibility="Hidden">
             <Rectangle.RenderTransform>
                 <RotateTransform x:Name="TargetTimeRotation" CenterX="0" CenterY="70" Angle="300" />
             </Rectangle.RenderTransform>
@@ -54,7 +54,7 @@
                     <PathFigure StartPoint="100,100" >
                         <PathFigure.Segments>
                             <LineSegment Point="100,0" x:Name="minTimeStartOnCircle" />
-                            <ArcSegment Point="200,100" Size="100, 100" SweepDirection="Clockwise" x:Name="minTimeArcSegment" />
+                            <ArcSegment Point="100,0" Size="100, 100" SweepDirection="Clockwise" x:Name="minTimeArcSegment" />
                         </PathFigure.Segments>
                     </PathFigure>
                 </PathGeometry>
@@ -69,7 +69,7 @@
                     <PathFigure StartPoint="100,100">
                         <PathFigure.Segments>
                             <LineSegment Point="100,0" x:Name="timeSpentStartOnCircle" />
-                            <ArcSegment IsLargeArc="True" Size="100, 100" Point="200, 100" SweepDirection="Clockwise" x:Name="timeSpentArc" />
+                            <ArcSegment IsLargeArc="True" Size="100, 100" Point="100,0" SweepDirection="Clockwise" x:Name="timeSpentArc" />
                         </PathFigure.Segments>
                     </PathFigure>
                 </PathGeometry>

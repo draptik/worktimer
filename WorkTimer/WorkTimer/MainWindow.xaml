@@ -38,7 +38,7 @@
             </Grid>
         </GroupBox>
 
-        <WorkTimer:WorkProgressUserControl x:Name="ucProgress" Grid.Row="1" Grid.ColumnSpan="2" />
+        <WorkTimer:WorkProgressUserControl x:Name="ucProgress" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
         
         <WorkTimer:AnalogClockUserControl x:Name="ucClock" Grid.Row="1" Grid.ColumnSpan="2" />
         
