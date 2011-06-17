@@ -1,0 +1,12 @@
+* WorkTimer
+** Purpose
+   Clock timer to display different aspects of your current work time.
+** Installation
+   Compile with Visual Studio and use the EXE file.
+*** Prerequisites/Supported Operating Systems
+    Windows with .NET 3.5 or greater
+** Usage
+   Enter Start time and press start button.
+** Upcoming Features
+*** GUI pimp
+
