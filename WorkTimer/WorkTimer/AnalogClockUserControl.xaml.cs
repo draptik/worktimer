@@ -67,7 +67,7 @@ namespace WorkTimer
 
         public void Init(WorkTime workTime, Config config)
         {
-            if (workTime == null || config == null) { return; }
+            if (workTime == null || config == null) { throw new ArgumentException("bla"); }
 
             _startTime = workTime.StartTime;
             _config = config;

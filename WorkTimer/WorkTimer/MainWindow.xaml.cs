@@ -116,15 +116,15 @@ namespace WorkTimer
                 return;
             }
 
-            InitClock();
-            //try
-            //{
-                
-            //}
-            //catch (Exception exception)
-            //{
-            //    ShowErrorDlg();
-            //}
+            
+            try
+            {
+                InitClock();
+            }
+            catch (Exception exception)
+            {
+                ShowErrorDlg();
+            }
             StartDispatcher();
         }
 
@@ -134,11 +134,17 @@ namespace WorkTimer
         {
             if (IsValidStartTime()) {
                 EnableVisibilityChecboxes(true);
-                ucClock.Init(new WorkTime(tbTimeStart.Text), Config.GetInstance());
-                ucClock.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
-                ucClock.ToggleMaxTimeDisplay(cbMaxTime.IsChecked.GetValueOrDefault());
-                ucClock.ToggleTargetTimeDisplay(cbTargetTime.IsChecked.GetValueOrDefault());
-                ucClock.ToggleTimeSpentDisplay(cbTimeSpent.IsChecked.GetValueOrDefault());
+                try {
+                    ucClock.Init(new WorkTime(tbTimeStart.Text), Config.GetInstance());
+                    ucClock.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
+                    ucClock.ToggleMaxTimeDisplay(cbMaxTime.IsChecked.GetValueOrDefault());
+                    ucClock.ToggleTargetTimeDisplay(cbTargetTime.IsChecked.GetValueOrDefault());
+                    ucClock.ToggleTimeSpentDisplay(cbTimeSpent.IsChecked.GetValueOrDefault());
+                }
+                catch (Exception exception) {
+                    ShowErrorDlgKillTimer();
+                    throw;
+                }
             }
         }
 
@@ -176,8 +182,8 @@ namespace WorkTimer
                 UpdateClock(workTime);
                 UpdateTrayIcon(workTime);
             }
-            catch (Exception) {
-                ShowErrorDlgKillTimer();
+            catch (Exception exception) {
+                ShowErrorDlg(exception.Message);
             }
         }
 
@@ -265,16 +271,21 @@ namespace WorkTimer
             return workTime.RemainingTillTarget.TotalSeconds > 0;
         }
 
-        private static void ShowErrorDlg()
+        private void ShowErrorDlg()
         {
-            MessageBox.Show("Bitte gültige Startzeit eingeben!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            ShowErrorDlg("Bitte gültige Startzeit eingeben!");
         }
 
         private void ShowErrorDlgKillTimer()
         {
-            MessageBox.Show("Startzeit darf nicht in der Zukunft liegen!", "", MessageBoxButton.OK, MessageBoxImage.Error);
-            StopDispatcher();
+            ShowErrorDlg("Startzeit darf nicht in der Zukunft liegen!");
         } 
+
+        private void ShowErrorDlg(string errorMsg)
+        {
+            MessageBox.Show(errorMsg, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            StopDispatcher();
+        }
 
         #endregion
         
@@ -292,14 +303,15 @@ namespace WorkTimer
 
         private void StopDispatcher()
         {
-            _dispatcherTimer.Stop();
+            if (_dispatcherTimer != null) _dispatcherTimer.Stop();
             ToggleStartStopButtons();
         }
 
         private void ToggleStartStopButtons()
         {
-            btnUpdate.IsEnabled = !_dispatcherTimer.IsEnabled;
-            btnStop.IsEnabled = _dispatcherTimer.IsEnabled;
+            if (_dispatcherTimer == null) return;
+            if (btnUpdate != null) { btnUpdate.IsEnabled = !_dispatcherTimer.IsEnabled; }
+            if (btnStop != null) { btnStop.IsEnabled = _dispatcherTimer.IsEnabled; }
         }
 
         #endregion
