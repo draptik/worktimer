@@ -13,28 +13,28 @@
         <Label Name="lbClockTop"    Foreground="White" Margin="0, 80, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto">time spent:</Label>
 
         <!-- Second  -->
-        <Rectangle Margin="150,0,149,150" Name="rectangleSecond" Stroke="White" Height="120" VerticalAlignment="Bottom">
+        <Rectangle Margin="150,0,148,150" Name="rectangleSecond" Stroke="White" Height="120" VerticalAlignment="Bottom" StrokeThickness="4" >
             <Rectangle.RenderTransform>
                 <RotateTransform x:Name="secondHand" CenterX="0" CenterY="120" Angle="0" />
             </Rectangle.RenderTransform>
         </Rectangle>
 
         <!-- Minute  -->
-        <Rectangle Margin="150,49,149,151" Name="rectangleMinute" Stroke="LightGreen">
+        <Rectangle Margin="150,49,148,151" Name="rectangleMinute" Stroke="LightGreen" StrokeThickness="4" >
             <Rectangle.RenderTransform>
                 <RotateTransform x:Name="minuteHand" CenterX="0" CenterY="100" Angle="0" />
             </Rectangle.RenderTransform>
         </Rectangle>
 
         <!-- Hour  -->
-        <Rectangle Margin="150,80,149,150" Name="rectangleHour" Stroke="LightYellow">
+        <Rectangle Margin="150,80,148,150" Name="rectangleHour" Stroke="LightYellow" StrokeThickness="4">
             <Rectangle.RenderTransform>
                 <RotateTransform x:Name="hourHand" CenterX="0" CenterY="70" Angle="0" />
             </Rectangle.RenderTransform>
         </Rectangle>
 
         <!-- Start time -->
-        <Rectangle Margin="150,80,149,150" Name="rectangleStartTime" Stroke="Red" StrokeThickness="2" Visibility="Visible">
+        <Rectangle Margin="150,80,149,150" Name="rectangleStartTime" Stroke="Red" StrokeThickness="2" Visibility="Hidden">
             <Rectangle.RenderTransform>
                 <RotateTransform x:Name="StartTimeRotation" CenterX="0" CenterY="70" Angle="0" />
             </Rectangle.RenderTransform>
@@ -55,13 +55,13 @@
         </Rectangle>
 
         <!-- Min Time (start to end) -->
-        <Path Stroke="Black" Fill="Blue" Opacity="0.4">
+        <Path Stroke="MediumBlue" Fill="MediumBlue" Opacity="0.2">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150" >
                         <PathFigure.Segments>
-                            <LineSegment Point="150,0" x:Name="minTimeStartOnCircle" />
-                            <ArcSegment Point="150,0" Size="135, 135" SweepDirection="Clockwise" x:Name="minTimeArcSegment" />
+                            <LineSegment Point="150,15" x:Name="minTimeStartOnCircle" />
+                            <ArcSegment Point="150,15" Size="135, 135" SweepDirection="Clockwise" x:Name="minTimeArcSegment" />
                         </PathFigure.Segments>
                     </PathFigure>
                 </PathGeometry>
@@ -69,28 +69,15 @@
             <!--<Path.RenderTransform><RotateTransform CenterX="100" CenterY="100" Angle="0" /></Path.RenderTransform>-->
         </Path>
 
-        <!-- Test -->
-        <!--<Path Stroke="Red" Fill="Yellow" Opacity="0.2">
-            <Path.Data>
-                <PathGeometry>
-                    <PathFigure StartPoint="150,150" >
-                        <PathFigure.Segments>
-                            <LineSegment Point="150,15" x:Name="testStartOnCircle" />
-                            <ArcSegment Point="285,150" Size="135, 135" SweepDirection="Clockwise" x:Name="testArcSegment" />
-                        </PathFigure.Segments>
-                    </PathFigure>
-                </PathGeometry>
-            </Path.Data>
-        </Path>-->
         
         <!-- Target time -->
-        <Path Stroke="Yellow" Fill="Magenta" Opacity="0.1">
+        <Path Stroke="Magenta" Fill="Magenta" Opacity="0.1">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150">
                         <PathFigure.Segments>
-                            <LineSegment Point="150,0" x:Name="targetTimeStartOnCircle" />
-                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,0" SweepDirection="Clockwise" x:Name="targetTimeArc" />
+                            <LineSegment Point="150,15" x:Name="targetTimeStartOnCircle" />
+                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,15" SweepDirection="Clockwise" x:Name="targetTimeArc" />
                         </PathFigure.Segments>
                     </PathFigure>
                 </PathGeometry>
@@ -103,8 +90,8 @@
                 <PathGeometry>
                     <PathFigure StartPoint="150,150">
                         <PathFigure.Segments>
-                            <LineSegment Point="150,0" x:Name="maxTimeStartOnCircle" />
-                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,0" SweepDirection="Clockwise" x:Name="maxTimeArc" />
+                            <LineSegment Point="150,15" x:Name="maxTimeStartOnCircle" />
+                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,15" SweepDirection="Clockwise" x:Name="maxTimeArc" />
                         </PathFigure.Segments>
                     </PathFigure>
                 </PathGeometry>
@@ -113,18 +100,17 @@
 
 
         <!-- Time Spent -->
-        <Path Stroke="Green" Fill="Green" Opacity="0.5">
+        <Path Stroke="YellowGreen" Fill="YellowGreen" Opacity="0.5">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150">
                         <PathFigure.Segments>
-                            <LineSegment Point="150,0" x:Name="timeSpentStartOnCircle" />
-                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,0" SweepDirection="Clockwise" x:Name="timeSpentArc" />
+                            <LineSegment Point="150,15" x:Name="timeSpentStartOnCircle" />
+                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,15" SweepDirection="Clockwise" x:Name="timeSpentArc" />
                         </PathFigure.Segments>
                     </PathFigure>
                 </PathGeometry>
             </Path.Data>
-            <!--<Path.RenderTransform><RotateTransform CenterX="100" CenterY="100" Angle="60" /></Path.RenderTransform>-->
         </Path>
 
     </Grid>

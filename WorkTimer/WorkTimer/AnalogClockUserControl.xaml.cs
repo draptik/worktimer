@@ -29,9 +29,8 @@ namespace WorkTimer
 
         public void Update(WorkTime workTime)
         {
-            timeSpentStartOnCircle.Point = TransformDate(workTime.StartTime, RadiusTimeSpent);
-            timeSpentArc.IsLargeArc = workTime.TimeSpent > new TimeSpan(6, 0, 0);
-            timeSpentArc.Point = TransformDate(DateTime.Now, RadiusTimeSpent);
+            var arc = new Arc(timeSpentStartOnCircle, timeSpentArc, _zeroPos);
+            arc.Update(workTime.StartTime, DateTime.Now, RadiusTimeSpent, workTime.TimeSpent > new TimeSpan(6, 0, 0));
 
             lbClockTop.Content = "time spent: " + workTime.TimeSpent.ToDisplayString();
             lbClockBottom.Content = "remaining: " + workTime.RemainingTillTarget.ToDisplayString();
@@ -44,7 +43,7 @@ namespace WorkTimer
                                         {
                                             secondHand.Angle = DateTime.Now.Second*6;
                                             minuteHand.Angle = DateTime.Now.Minute*6;
-                                            hourHand.Angle = GetAngle(DateTime.Now);
+                                            hourHand.Angle = DateTime.Now.Hour * 30 + DateTime.Now.Minute * 0.5;
                                         }));
         }
         
@@ -66,15 +65,16 @@ namespace WorkTimer
 
         private void InitStartTime(WorkTime workTime)
         {
-            StartTimeRotation.Angle = GetAngle(workTime.StartTime);
-            rectangleStartTime.Visibility = Visibility.Hidden;
+            var rect = new Rect(StartTimeRotation, rectangleStartTime);
+            rect.Update(workTime.StartTime);
+            rect.Visibility = Visibility.Hidden;
         }
 
         private void InitTargetTime(WorkTime workTime, double radius)
         {
-            TargetTimeRotation.Angle = GetAngle(workTime.TargetTime);
-            rectangleTargetTime.Visibility = Visibility.Hidden;
-
+            var rect = new Rect(TargetTimeRotation, rectangleTargetTime);
+            rect.Update(workTime.TargetTime);
+            rect.Visibility = Visibility.Hidden;
             InitArc(targetTimeStartOnCircle, targetTimeArc, workTime.StartTime, workTime.TargetTime, radius, true);
         }
 
@@ -91,43 +91,9 @@ namespace WorkTimer
 
         private void InitArc(LineSegment lineSegment, ArcSegment arcSegment, DateTime startTime, DateTime endTime, double radius, bool isLargeArc)
         {
-            lineSegment.Point = TransformDate(startTime, radius);
-            arcSegment.Size = new Size(radius, radius);
-            arcSegment.IsLargeArc = isLargeArc;
-            arcSegment.Point = TransformDate(endTime, radius);
+            var arc = new Arc(lineSegment, arcSegment, _zeroPos);
+            arc.Update(startTime, endTime, radius, isLargeArc);
         }
 
-        #region Calc Methods
-		
-        private Point TransformDate(DateTime dateTime, double radius)
-        {
-            return TransformPoint(GetPointRelative(dateTime, radius));
-        }
-
-        private Point TransformPoint(Point point)
-        {
-            return new Point(_zeroPos.X + point.X, _zeroPos.Y - point.Y);
-        }
-
-        private static Point GetPointRelative(DateTime dateTime, double radius)
-        {
-            return new Point
-                   {
-                       X = radius*Math.Sin(GetRadians(dateTime)), 
-                       Y = radius*Math.Cos(GetRadians(dateTime))
-                   };
-        }
-
-        private static double GetRadians(DateTime dateTime)
-        {
-            return GetAngle(dateTime)*(Math.PI/180);
-        }
-
-        private static double GetAngle(DateTime dateTime)
-        {
-            return dateTime.Hour * 30 + dateTime.Minute * 0.5;
-        }
-
-        #endregion    
     }
 }
