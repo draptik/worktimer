@@ -63,7 +63,7 @@ namespace WorkTimer
             var validStartTime = ValidateStartTime(startTimeString);
             var startTime = InitStartTime(validStartTime);
             if (IsStartTimeInFuture(startTime)) {
-                throw new ArgumentException("Invalid start time!");
+                throw new ArgumentException("Invalid start time (start time is in future)!");
             }
             CalcTimes(startTime);
         }
@@ -78,7 +78,7 @@ namespace WorkTimer
             if (DateTime.TryParseExact(startTimeString, TimeFormat, _currentCultureInfo, DateTimeStyles.None, out startTime)) {
                 return startTime;
             }
-            throw new ArgumentException("Invalid start time!");
+            throw new ArgumentException("Invalid start time! Required format: H:mm");
         }
 
         /// <summary>
@@ -86,9 +86,17 @@ namespace WorkTimer
         /// </summary>
         private DateTime InitStartTime(DateTime startTime)
         {
+            //if (IsStartTimeInFuture(startTime)) {
+            //    return TakeYesterdaysTime(startTime);
+            //}
             return new DateTime(_clock.Now.Year, _clock.Now.Month, _clock.Now.Day, startTime.Hour,
                                 startTime.Minute, startTime.Second);
         }
+
+        //private DateTime TakeYesterdaysTime(DateTime startTime)
+        //{
+        //    return _clock.Now.Subtract(new TimeSpan(24, 0, 0));
+        //}
 
         private bool IsStartTimeInFuture(DateTime initStartTime)
         {

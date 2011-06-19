@@ -1,13 +1,17 @@
-* ID 001: Checkboxes should also toggle progress bar
-* ID 002: Create user control for time text boxes
-* ID 003: Create user control for buttons
-* ID 004: Create user control for checkboxes
-* ID 005: Create Groupbox for checkboxes
-* ID 006: Refactor to MVP
-* ID 007: Let user choose all colors
-* ID 008: Add "flashy" warning if user works too long
-* ID 009:
-* ID 010:
-* ID 011:
-* ID 012:
+* TODO ID 001: Checkboxes should also toggle progress bar
+** DONE MinTime
+** TODO MaxTime
+** TODO TargetTime
+** DONE Current Time
+* TODO ID 002: Create user control for time text boxes
+* TODO ID 003: Create user control for buttons
+* TODO ID 004: Create user control for checkboxes
+* TODO ID 005: Create Groupbox for checkboxes
+* TODO ID 006: Refactor to MVP
+* TODO ID 007: Let user choose all colors
+* TODO [#A] ID 008: Add "flashy" warning if user works too long
+* DONE ID 009: Add Config class
+* TODO ID 010: Take previous day as input before throwing "Future date" exception
+* TODO ID 011: Handle worktime passing dates
+* TODO ID 012: Add time below progress bar hour lines
 * ID 013:

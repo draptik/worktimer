@@ -16,13 +16,20 @@ namespace WorkTimer
         private const double MinTimeStart = 6.0;
         private const double MaxTime      = 10.75;
 
+        private Config _config;
+        private Rect _rectTimeSpent;
+        private Rect _rectMinTime;
+        private Rect _rectMaxTime;
+        private Rect _rectTargetTime;
+
         public WorkProgressUserControl()
         {
             InitializeComponent();
         }
 
-        public void Init()
+        public void Init(Config config)
         {
+            _config = config;
             InitHourLines();
             InitTargetLine(TargetTime);
             InitMinTimes(MinTimeStart);
@@ -30,23 +37,72 @@ namespace WorkTimer
 
         public void UpdateCurrentPos(TimeSpan timeSpent)
         {
-            var currentPos = GetPos(timeSpent.TotalMinutes / 60.0);
-            rctCurrent.Width = currentPos;
+            _rectTimeSpent = new Rect(rctCurrent)
+                             {
+                                 Color = _config.TimeSpentBrush,
+                                 Width = GetPos(timeSpent.TotalMinutes/60.0)
+                             };
         }
 
 
         private void InitMinTimes(double minTimeStart)
         {
-            rctMinTime.Margin     = SetElementPos(GetPos(minTimeStart), rctMinTime);
-            rctMinTime.Width      = GetPos(BreakTime);
-            rctMinTime.Visibility = Visibility.Visible;
+            _rectMinTime = new Rect(rctMinTime)
+                           {
+                               Margin = SetElementPos(GetPos(minTimeStart), rctMinTime),
+                               Width = GetPos(BreakTime),
+                               Visibility = true,
+                               Color = _config.MinTimeBrush
+                           };
         }
+
+        private void InitTargetLine(double targetTime)
+        {
+            var targetPos = GetPos(targetTime);
+            var line = new Line
+            {
+                Stroke = _config.TargetTimeBrush,
+                X1 = targetPos,
+                X2 = targetPos,
+                Y1 = GetHeightTop(),
+                Y2 = GetHeightBottom(),
+                StrokeThickness = 2
+            };
+            gridMain.Children.Add(line);
+        }
+        
+
+
+        public void ToggleMinTimeDisplay(bool isChecked)
+        {
+            if (_rectMinTime != null) _rectMinTime.Visibility = isChecked;
+        }
+
+        public void ToggleMaxTimeDisplay(bool isChecked)
+        {
+            if (_rectMaxTime != null) _rectMaxTime.Visibility = isChecked;
+        }
+
+        public void ToggleTargetTimeDisplay(bool isChecked)
+        {
+            if (_rectTargetTime != null) _rectTargetTime.Visibility = isChecked;
+        }
+
+        public void ToggleTimeSpentDisplay(bool isChecked)
+        {
+            if (_rectTimeSpent != null) _rectTimeSpent.Visibility = isChecked;
+        }
+
+
+
+        #region Hour Lines
 
         private void InitHourLines()
         {
             const int numHours = 10;
-            for (var i = 1; i <= numHours; i++) {
-                var xPos  = GetPos(i);
+            for (var i = 1; i <= numHours; i++)
+            {
+                var xPos = GetPos(i);
                 AddLine(xPos);
                 AddLabel(i, xPos);
             }
@@ -57,47 +113,35 @@ namespace WorkTimer
             const double offsetX = 8;
             const double offsetY = 17;
             var label = new Label
-                        {
-                            Margin = new Thickness(xPos - offsetX, GetHeightTop() - offsetY, 0, 0),
-                            Content = i.ToString(),
-                            FontSize = 8,
-                            Height = offsetY + 5,
-                            VerticalAlignment = VerticalAlignment.Top,
-                        };
+            {
+                Margin = new Thickness(xPos - offsetX, GetHeightTop() - offsetY, 0, 0),
+                Content = i.ToString(),
+                FontSize = 8,
+                Height = offsetY + 5,
+                VerticalAlignment = VerticalAlignment.Top,
+            };
             gridMain.Children.Add(label);
         }
 
         private void AddLine(double xPos)
         {
             var line = new Line
-                       {
-                           Stroke = Brushes.LightSteelBlue,
-                           X1 = xPos,
-                           X2 = xPos,
-                           Y1 = GetHeightTop(),
-                           Y2 = GetHeightBottom(),
-                           StrokeThickness = 1,
-                           StrokeDashArray = new DoubleCollection {2, 2},
-                           Opacity = 50
-                       };
-            gridMain.Children.Add(line);
-        }
-
-        private void InitTargetLine(double targetTime)
-        {
-            var targetPos = GetPos(targetTime);
-            var line = new Line
             {
-                Stroke = Brushes.Green,
-                X1 = targetPos,
-                X2 = targetPos,
+                Stroke = Brushes.LightSteelBlue,
+                X1 = xPos,
+                X2 = xPos,
                 Y1 = GetHeightTop(),
                 Y2 = GetHeightBottom(),
-                StrokeThickness = 2
+                StrokeThickness = 1,
+                StrokeDashArray = new DoubleCollection { 2, 2 },
+                Opacity = 50
             };
             gridMain.Children.Add(line);
         }
-        
+
+        #endregion
+
+        #region Calc Methods
 
         private double GetHeightBottom()
         {
@@ -118,6 +162,8 @@ namespace WorkTimer
         private static Thickness SetElementPos(double pos, FrameworkElement element)
         {
             return new Thickness(pos, element.Margin.Top, element.Margin.Right, element.Margin.Bottom);
-        }
+        } 
+
+        #endregion
     }
 }

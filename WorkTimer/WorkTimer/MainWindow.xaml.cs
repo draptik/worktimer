@@ -105,7 +105,7 @@ namespace WorkTimer
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ucProgress.Init();
+            ucProgress.Init(Config.GetInstance());
             _defaultBackground = gbTimes.Background;
         }
 
@@ -117,6 +117,14 @@ namespace WorkTimer
             }
 
             InitClock();
+            //try
+            //{
+                
+            //}
+            //catch (Exception exception)
+            //{
+            //    ShowErrorDlg();
+            //}
             StartDispatcher();
         }
 
@@ -126,7 +134,7 @@ namespace WorkTimer
         {
             if (IsValidStartTime()) {
                 EnableVisibilityChecboxes(true);
-                ucClock.Init(new WorkTime(tbTimeStart.Text));
+                ucClock.Init(new WorkTime(tbTimeStart.Text), Config.GetInstance());
                 ucClock.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
                 ucClock.ToggleMaxTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
                 ucClock.ToggleTargetTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
@@ -199,6 +207,7 @@ namespace WorkTimer
         private void UpdateProgressGui(WorkTime workTime)
         {
             ucProgress.UpdateCurrentPos(workTime.TimeSpent);
+            ucProgress.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
         }
 
         private void UpdateTitle(WorkTime workTime)
@@ -295,24 +304,30 @@ namespace WorkTimer
 
         #endregion
 
+        #region Checkbox States
+        
         private void cbMinTime_CheckChanged(object sender, RoutedEventArgs e)
         {
             ucClock.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
+            ucProgress.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
         }
 
         private void cbMaxTime_CheckChanged(object sender, RoutedEventArgs e)
         {
             ucClock.ToggleMaxTimeDisplay(cbMaxTime.IsChecked.GetValueOrDefault());
+            ucProgress.ToggleMaxTimeDisplay(cbMaxTime.IsChecked.GetValueOrDefault());
         }
 
         private void cbTimeSpent_CheckChanged(object sender, RoutedEventArgs e)
         {
             ucClock.ToggleTimeSpentDisplay(cbTimeSpent.IsChecked.GetValueOrDefault());
+            ucProgress.ToggleTimeSpentDisplay(cbTimeSpent.IsChecked.GetValueOrDefault());
         }
 
         private void cbTargetTime_CheckChanged(object sender, RoutedEventArgs e)
         {
             ucClock.ToggleTargetTimeDisplay(cbTargetTime.IsChecked.GetValueOrDefault());
+            ucProgress.ToggleTargetTimeDisplay(cbTargetTime.IsChecked.GetValueOrDefault());
         }
 
         private void EnableVisibilityChecboxes(bool enableCheckboxes)
@@ -321,7 +336,9 @@ namespace WorkTimer
             cbMaxTime.IsEnabled = enableCheckboxes;
             cbTimeSpent.IsEnabled = enableCheckboxes;
             cbTargetTime.IsEnabled = enableCheckboxes;
-        }
+        } 
+
+        #endregion
 
     }
 }

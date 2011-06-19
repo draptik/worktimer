@@ -93,6 +93,7 @@
       <DependentUpon>AnalogClockUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Arc.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="Rect.cs" />
     <Compile Include="WorkProgressUserControl.xaml.cs">
       <DependentUpon>WorkProgressUserControl.xaml</DependentUpon>

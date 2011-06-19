@@ -25,6 +25,7 @@ namespace WorkTimer
         private Arc _maxTimeArc;
         private Arc _timeSpentArc;
         private DateTime _startTime;
+        private Config _config;
 
         public AnalogClockUserControl()
         {
@@ -35,7 +36,7 @@ namespace WorkTimer
 
         public void Update(WorkTime workTime, bool isChecked)
         {
-            _timeSpentArc = new Arc(timeSpentPath, timeSpentStartOnCircle, timeSpentArc, _zeroPos);
+            _timeSpentArc = new Arc(timeSpentPath, timeSpentStartOnCircle, timeSpentArc, _zeroPos, _config.TimeSpentBrush);
             _timeSpentArc.Update(workTime.StartTime, DateTime.Now, RadiusTimeSpent, workTime.TimeSpent > new TimeSpan(6, 0, 0));
             _timeSpentArc.Visibility = isChecked;
 
@@ -43,7 +44,7 @@ namespace WorkTimer
             lbClockBottom.Content = "remaining: " + workTime.RemainingTillTarget.ToDisplayString();
 
             if (workTime.StartTime != _startTime) {
-                Init(workTime);
+                Init(workTime, _config);
             }
         }
 
@@ -64,11 +65,12 @@ namespace WorkTimer
             //throw new NotImplementedException();
         }
 
-        public void Init(WorkTime workTime)
+        public void Init(WorkTime workTime, Config config)
         {
-            if (workTime == null) { return; }
+            if (workTime == null || config == null) { return; }
 
             _startTime = workTime.StartTime;
+            _config = config;
 
             InitStartTime(workTime);
             InitTargetTime(workTime, RadiusTargetTime);
@@ -80,32 +82,33 @@ namespace WorkTimer
         {
             var rect = new Rect(StartTimeRotation, rectangleStartTime);
             rect.Update(workTime.StartTime);
-            rect.Visibility = Visibility.Hidden;
+            rect.Visibility = false;
         }
 
         private void InitTargetTime(WorkTime workTime, double radius)
         {
             var rect = new Rect(TargetTimeRotation, rectangleTargetTime);
             rect.Update(workTime.TargetTime);
-            rect.Visibility = Visibility.Hidden;
+            rect.Visibility = false;
             
-            _targetTimeArc = InitArc(targetTimePath, targetTimeStartOnCircle, targetTimeArc, workTime.StartTime, workTime.TargetTime, radius, true);
+            _targetTimeArc = InitArc(targetTimePath, targetTimeStartOnCircle, targetTimeArc, workTime.StartTime, workTime.TargetTime, radius, true, _config.TargetTimeBrush);
         }
 
         private void InitMaxTime(WorkTime workTime, double radius)
         {
-            _maxTimeArc = InitArc(maxTimePath, maxTimeStartOnCircle, maxTimeArc, workTime.TargetTime, workTime.MaxTime, radius, false);
+            _maxTimeArc = InitArc(maxTimePath, maxTimeStartOnCircle, maxTimeArc, workTime.TargetTime, workTime.MaxTime, radius, false, _config.MaxTimeBrush);
         }
 
         private void InitMinTime(WorkTime workTime, double radius)
         {
             var isLargeArc = workTime.MinTimeEnd.Subtract(workTime.MinTimeStart) > new TimeSpan(6, 0, 0);
-            _minTimeArc = InitArc(minTimePath, minTimeStartOnCircle, minTimeArcSegment, workTime.MinTimeStart, workTime.MinTimeEnd, radius, isLargeArc);
+            _minTimeArc = InitArc(minTimePath, minTimeStartOnCircle, minTimeArcSegment, workTime.MinTimeStart, workTime.MinTimeEnd, radius, isLargeArc, _config.MinTimeBrush);
         }
 
-        private Arc InitArc(Path path, LineSegment lineSegment, ArcSegment arcSegment, DateTime startTime, DateTime endTime, double radius, bool isLargeArc)
+        private Arc InitArc(Path path, LineSegment lineSegment, ArcSegment arcSegment, 
+            DateTime startTime, DateTime endTime, double radius, bool isLargeArc, Brush brush)
         {
-            var arc = new Arc(path, lineSegment, arcSegment, _zeroPos);
+            var arc = new Arc(path, lineSegment, arcSegment, _zeroPos, brush);
             arc.Update(startTime, endTime, radius, isLargeArc);
             return arc;
         }

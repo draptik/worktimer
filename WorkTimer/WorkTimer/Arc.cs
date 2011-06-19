@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Ink;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -20,12 +21,14 @@ namespace WorkTimer
             set { Path.Visibility = value ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden; }
         }
 
-        public Arc(Path path, LineSegment lineSegment, ArcSegment arcSegment, Point zeroPos)
+        public Arc(Path path, LineSegment lineSegment, ArcSegment arcSegment, Point zeroPos, Brush brush)
         {
             Path = path;
             LineSegment = lineSegment;
             ArcSegment = arcSegment;
             ZeroPos = zeroPos;
+            Path.Stroke = brush;
+            Path.Fill = brush;
         }
 
         public void Update(DateTime startTime, DateTime endTime, double radius, bool isLargeArc)
