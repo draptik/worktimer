@@ -14,10 +14,10 @@ namespace WorkTimer
     /// </summary>
     public partial class AnalogClockUserControl
     {
-        private const double RadiusMinTime = 125d;
+        private const double RadiusMinTime = 110d;
         private const double RadiusTimeSpent = 135d;
-        private const double RadiusTargetTime = 135d;
-        private const double RadiusMaxTime = 135d;
+        private const double RadiusTargetTime = 110d;
+        private const double RadiusMaxTime = 110d;
         private readonly Point _zeroPos = new Point(150, 150);
         readonly System.Timers.Timer _timer = new System.Timers.Timer(1000);
         private Arc _minTimeArc;

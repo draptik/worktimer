@@ -1,0 +1,13 @@
+* ID 001: Checkboxes should also toggle progress bar
+* ID 002: Create user control for time text boxes
+* ID 003: Create user control for buttons
+* ID 004: Create user control for checkboxes
+* ID 005: Create Groupbox for checkboxes
+* ID 006: Refactor to MVP
+* ID 007: Let user choose all colors
+* ID 008: Add "flashy" warning if user works too long
+* ID 009:
+* ID 010:
+* ID 011:
+* ID 012:
+* ID 013:
