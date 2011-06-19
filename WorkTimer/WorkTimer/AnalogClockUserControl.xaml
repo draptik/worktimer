@@ -23,35 +23,6 @@
             </Rectangle.RenderTransform>
         </Rectangle>
 
-        <!-- Min Time (start to end) -->
-        <Path Stroke="Yellow" Fill="Yellow" Opacity="0.4" Visibility="Hidden" Name="minTimePath" >
-            <Path.Data>
-                <PathGeometry>
-                    <PathFigure StartPoint="150,150" >
-                        <PathFigure.Segments>
-                            <LineSegment Point="150,15" x:Name="minTimeStartOnCircle" />
-                            <ArcSegment Point="150,15" Size="135, 135" SweepDirection="Clockwise" x:Name="minTimeArcSegment" />
-                        </PathFigure.Segments>
-                    </PathFigure>
-                </PathGeometry>
-            </Path.Data>
-            <!--<Path.RenderTransform><RotateTransform CenterX="100" CenterY="100" Angle="0" /></Path.RenderTransform>-->
-        </Path>
-
-        
-        <!-- Target time -->
-        <Path Stroke="SkyBlue" Fill="SkyBlue" Opacity="0.4"  Visibility="Hidden" Name="targetTimePath">
-            <Path.Data>
-                <PathGeometry>
-                    <PathFigure StartPoint="150,150">
-                        <PathFigure.Segments>
-                            <LineSegment Point="150,15" x:Name="targetTimeStartOnCircle" />
-                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,15" SweepDirection="Clockwise" x:Name="targetTimeArc" />
-                        </PathFigure.Segments>
-                    </PathFigure>
-                </PathGeometry>
-            </Path.Data>
-        </Path>
 
         <!-- Time Spent -->
         <Path Stroke="Aquamarine" Fill="Aquamarine" Opacity="0.5"  Visibility="Hidden" Name="timeSpentPath">
@@ -67,8 +38,40 @@
             </Path.Data>
         </Path>
 
+
+        
+        <!-- Target time -->
+        <Path Stroke="SkyBlue" Fill="SkyBlue" Opacity="0.9"  Visibility="Hidden" Name="targetTimePath">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="150,150">
+                        <PathFigure.Segments>
+                            <LineSegment Point="150,15" x:Name="targetTimeStartOnCircle" />
+                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,15" SweepDirection="Clockwise" x:Name="targetTimeArc" />
+                        </PathFigure.Segments>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+
+        <!-- Min Time (start to end) -->
+        <Path Stroke="YellowGreen" Fill="YellowGreen" Opacity="0.7" Visibility="Hidden" Name="minTimePath" >
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="150,150" >
+                        <PathFigure.Segments>
+                            <LineSegment Point="150,15" x:Name="minTimeStartOnCircle" />
+                            <ArcSegment Point="150,15" Size="135, 135" SweepDirection="Clockwise" x:Name="minTimeArcSegment" />
+                        </PathFigure.Segments>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+            <!--<Path.RenderTransform><RotateTransform CenterX="100" CenterY="100" Angle="0" /></Path.RenderTransform>-->
+        </Path>
+        
         <!-- Max time -->
-        <Path Stroke="Red" Fill="Red" Opacity="0.4"  Visibility="Hidden" Name="maxTimePath">
+        <Path Stroke="Red" Fill="Red" Opacity="0.9"  Visibility="Hidden" Name="maxTimePath">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150">
