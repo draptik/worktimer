@@ -9,8 +9,8 @@
     <Grid Width="300" Height="300" MouseLeftButtonDown="Grid_MouseDown">
         <Image Source="images/clockAnalog.png"></Image>
 
-        <Label Name="lbClockBottom" Foreground="White" Margin="0, 0, 0, 80" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="Auto" Width="Auto">bottom</Label>
-        <Label Name="lbClockTop"    Foreground="White" Margin="0, 80, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto">top</Label>
+        <Label Name="lbClockBottom" Foreground="White" Margin="0, 0, 0, 80" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="Auto" Width="Auto">remaining:</Label>
+        <Label Name="lbClockTop"    Foreground="White" Margin="0, 80, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto">time spent:</Label>
 
         <!-- Second  -->
         <Rectangle Margin="150,0,149,150" Name="rectangleSecond" Stroke="White" Height="120" VerticalAlignment="Bottom">
@@ -34,12 +34,19 @@
         </Rectangle>
 
         <!-- Start time -->
-        <Rectangle Margin="150,80,149,150" Name="rectangleStartTime" Stroke="Red" StrokeThickness="2" Visibility="Hidden">
+        <Rectangle Margin="150,80,149,150" Name="rectangleStartTime" Stroke="Red" StrokeThickness="2" Visibility="Visible">
             <Rectangle.RenderTransform>
-                <RotateTransform x:Name="StartTimeRotation" CenterX="0" CenterY="70" Angle="100" />
+                <RotateTransform x:Name="StartTimeRotation" CenterX="0" CenterY="70" Angle="0" />
             </Rectangle.RenderTransform>
         </Rectangle>
 
+        <!-- testing -->
+        <Rectangle Margin="150,80,140,150" Stroke="Blue" Visibility="Hidden" >
+            <Rectangle.RenderTransform>
+                <RotateTransform x:Name="bla" CenterX="0" CenterY="70" Angle="30" />
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        
         <!-- Target time -->
         <Rectangle Margin="150,80,149,150" Name="rectangleTargetTime" Stroke="Green" StrokeThickness="2" Visibility="Hidden">
             <Rectangle.RenderTransform>
@@ -48,7 +55,7 @@
         </Rectangle>
 
         <!-- Min Time (start to end) -->
-        <Path Stroke="Black" Fill="Blue" Canvas.Top="50" Canvas.Left="50" Height="200" Width="200" Opacity="0.9">
+        <Path Stroke="Black" Fill="Blue" Canvas.Top="50" Canvas.Left="50" Height="200" Width="200" Opacity="0.4">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="100,100" >
@@ -63,7 +70,7 @@
         </Path>
 
         <!-- Time Spent -->
-        <Path Stroke="Red" Fill="Yellow" Canvas.Top="50" Canvas.Left="50" Height="200" Width="200" Opacity="0.1">
+        <Path Stroke="Red" Fill="Yellow" Canvas.Top="50" Canvas.Left="50" Height="200" Width="200" Opacity="0.2">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="100,100">
@@ -77,5 +84,19 @@
             <!--<Path.RenderTransform><RotateTransform CenterX="100" CenterY="100" Angle="60" /></Path.RenderTransform>-->
         </Path>
 
+        <!-- Target time -->
+        <Path Stroke="Red" Fill="Yellow" Canvas.Top="50" Canvas.Left="50" Height="200" Width="200" Opacity="0.2">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="100,100">
+                        <PathFigure.Segments>
+                            <LineSegment Point="100,0" x:Name="targetTimeStartOnCircle" />
+                            <ArcSegment IsLargeArc="True" Size="100, 100" Point="100,0" SweepDirection="Clockwise" x:Name="targetTimeArc" />
+                        </PathFigure.Segments>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+        
     </Grid>
 </UserControl>

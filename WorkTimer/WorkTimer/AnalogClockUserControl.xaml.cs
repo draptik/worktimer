@@ -27,6 +27,9 @@ namespace WorkTimer
             timeSpentStartOnCircle.Point = TransformDate(workTime.StartTime);
             timeSpentArc.IsLargeArc = workTime.TimeSpent > new TimeSpan(6, 0, 0);
             timeSpentArc.Point = TransformDate(DateTime.Now);
+
+            lbClockTop.Content = "time spent: " + workTime.TimeSpent.ToDisplayString();
+            lbClockBottom.Content = "remaining: " + workTime.RemainingTillTarget.ToDisplayString();
         }
 
         void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -113,12 +116,12 @@ namespace WorkTimer
 
         private static double GetYPosRelative(DateTime time)
         {
-            return Radius*Math.Cos(GetRadians(time));
+            return (Radius)*Math.Cos(GetRadians(time));
         }
 
         private static double GetXPosRelative(DateTime time)
         {
-            return Radius*Math.Sin(GetRadians(time));
+            return (Radius)*Math.Sin(GetRadians(time));
         }
 
         private static double GetRadians(DateTime dateTime)
