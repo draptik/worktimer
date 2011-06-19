@@ -136,9 +136,9 @@ namespace WorkTimer
                 EnableVisibilityChecboxes(true);
                 ucClock.Init(new WorkTime(tbTimeStart.Text), Config.GetInstance());
                 ucClock.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
-                ucClock.ToggleMaxTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
-                ucClock.ToggleTargetTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
-                ucClock.ToggleTimeSpentDisplay(cbMinTime.IsChecked.GetValueOrDefault());
+                ucClock.ToggleMaxTimeDisplay(cbMaxTime.IsChecked.GetValueOrDefault());
+                ucClock.ToggleTargetTimeDisplay(cbTargetTime.IsChecked.GetValueOrDefault());
+                ucClock.ToggleTimeSpentDisplay(cbTimeSpent.IsChecked.GetValueOrDefault());
             }
         }
 
