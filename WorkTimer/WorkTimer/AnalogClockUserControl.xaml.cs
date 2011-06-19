@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace WorkTimer
@@ -12,7 +13,11 @@ namespace WorkTimer
     /// </summary>
     public partial class AnalogClockUserControl
     {
-        private const double Radius = 100d;
+        private const double RadiusMinTime = 125d;
+        private const double RadiusTimeSpent = 135d;
+        private const double RadiusTargetTime = 135d;
+        private const double RadiusMaxTime = 135d;
+        private readonly Point _zeroPos = new Point(150, 150);
         readonly System.Timers.Timer _timer = new System.Timers.Timer(1000);
 
         public AnalogClockUserControl()
@@ -24,9 +29,9 @@ namespace WorkTimer
 
         public void Update(WorkTime workTime)
         {
-            timeSpentStartOnCircle.Point = TransformDate(workTime.StartTime);
+            timeSpentStartOnCircle.Point = TransformDate(workTime.StartTime, RadiusTimeSpent);
             timeSpentArc.IsLargeArc = workTime.TimeSpent > new TimeSpan(6, 0, 0);
-            timeSpentArc.Point = TransformDate(DateTime.Now);
+            timeSpentArc.Point = TransformDate(DateTime.Now, RadiusTimeSpent);
 
             lbClockTop.Content = "time spent: " + workTime.TimeSpent.ToDisplayString();
             lbClockBottom.Content = "remaining: " + workTime.RemainingTillTarget.ToDisplayString();
@@ -54,8 +59,9 @@ namespace WorkTimer
             if (workTime == null) { return; }
 
             InitStartTime(workTime);
-            InitTargetTime(workTime);
-            InitMinTime(workTime);
+            InitTargetTime(workTime, RadiusTargetTime);
+            InitMinTime(workTime, RadiusMinTime);
+            InitMaxTime(workTime, RadiusMaxTime);
         }
 
         private void InitStartTime(WorkTime workTime)
@@ -64,64 +70,52 @@ namespace WorkTimer
             rectangleStartTime.Visibility = Visibility.Visible;
         }
 
-        private void InitTargetTime(WorkTime workTime)
+        private void InitTargetTime(WorkTime workTime, double radius)
         {
             TargetTimeRotation.Angle = GetAngle(workTime.TargetTime);
             rectangleTargetTime.Visibility = Visibility.Visible;
+
+            InitArc(targetTimeStartOnCircle, targetTimeArc, workTime.StartTime, workTime.MaxTime, radius, true);
         }
 
-        #region MinTime
-
-        private void InitMinTime(WorkTime workTime)
+        private void InitMaxTime(WorkTime workTime, double radius)
         {
-            minTimeArcSegment.IsLargeArc = workTime.MinTimeEnd.Subtract(workTime.MinTimeStart) > new TimeSpan(6, 0, 0);
-            InitMinTimeStart(workTime);
-            InitMinTimeEnd(workTime);
+            InitArc(maxTimeStartOnCircle, maxTimeArc, workTime.TargetTime, workTime.TargetTime, radius, false);
         }
 
-        private void InitMinTimeStart(WorkTime workTime)
+        private void InitMinTime(WorkTime workTime, double radius)
         {
-            minTimeStartOnCircle.Point = TransformDate(workTime.MinTimeStart);
+            var isLargeArc = workTime.MinTimeEnd.Subtract(workTime.MinTimeStart) > new TimeSpan(6, 0, 0);
+            InitArc(minTimeStartOnCircle, minTimeArcSegment, workTime.MinTimeStart, workTime.MinTimeEnd, radius, isLargeArc);
         }
 
-        private void InitMinTimeEnd(WorkTime workTime)
+        private void InitArc(LineSegment lineSegment, ArcSegment arcSegment, DateTime startTime, DateTime endTime, double radius, bool isLargeArc)
         {
-            minTimeArcSegment.Point = TransformDate(workTime.MinTimeEnd);
+            lineSegment.Point = TransformDate(startTime, radius);
+            arcSegment.Size = new Size(radius, radius);
+            arcSegment.IsLargeArc = isLargeArc;
+            arcSegment.Point = TransformDate(endTime, radius);
         }
-
-        #endregion
-
 
         #region Calc Methods
 		
-        private static Point TransformDate(DateTime dateTime)
+        private Point TransformDate(DateTime dateTime, double radius)
         {
-            return TransformPoint(GetXPosRelative(dateTime), GetYPosRelative(dateTime));
+            return TransformPoint(GetPointRelative(dateTime, radius));
         }
 
-        private static Point TransformPoint(double x, double y)
+        private Point TransformPoint(Point point)
         {
-            return new Point(FixX(x), FixY(y));
+            return new Point(_zeroPos.X + point.X, _zeroPos.Y - point.Y);
         }
 
-        private static double FixX(double x)
+        private static Point GetPointRelative(DateTime dateTime, double radius)
         {
-            return Radius + x;
-        }
-
-        private static double FixY(double y)
-        {
-            return Radius - y;
-        }
-
-        private static double GetYPosRelative(DateTime time)
-        {
-            return (Radius)*Math.Cos(GetRadians(time));
-        }
-
-        private static double GetXPosRelative(DateTime time)
-        {
-            return (Radius)*Math.Sin(GetRadians(time));
+            return new Point
+                   {
+                       X = radius*Math.Sin(GetRadians(dateTime)), 
+                       Y = radius*Math.Cos(GetRadians(dateTime))
+                   };
         }
 
         private static double GetRadians(DateTime dateTime)
