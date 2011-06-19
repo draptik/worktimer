@@ -117,14 +117,20 @@ namespace WorkTimer
             }
 
             InitClock();
-
             StartDispatcher();
         }
+
+        
 
         private void InitClock()
         {
             if (IsValidStartTime()) {
+                EnableVisibilityChecboxes(true);
                 ucClock.Init(new WorkTime(tbTimeStart.Text));
+                ucClock.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
+                ucClock.ToggleMaxTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
+                ucClock.ToggleTargetTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
+                ucClock.ToggleTimeSpentDisplay(cbMinTime.IsChecked.GetValueOrDefault());
             }
         }
 
@@ -137,6 +143,7 @@ namespace WorkTimer
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             StopDispatcher();
+            EnableVisibilityChecboxes(false);
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -168,7 +175,10 @@ namespace WorkTimer
 
         private void UpdateClock(WorkTime workTime)
         {
-            ucClock.Update(workTime);
+            ucClock.Update(workTime, cbTimeSpent.IsChecked.GetValueOrDefault());
+            ucClock.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
+            ucClock.ToggleMaxTimeDisplay(cbMaxTime.IsChecked.GetValueOrDefault());
+            ucClock.ToggleTargetTimeDisplay(cbTargetTime.IsChecked.GetValueOrDefault());
         }
 
 
@@ -284,5 +294,34 @@ namespace WorkTimer
         }
 
         #endregion
+
+        private void cbMinTime_CheckChanged(object sender, RoutedEventArgs e)
+        {
+            ucClock.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
+        }
+
+        private void cbMaxTime_CheckChanged(object sender, RoutedEventArgs e)
+        {
+            ucClock.ToggleMaxTimeDisplay(cbMaxTime.IsChecked.GetValueOrDefault());
+        }
+
+        private void cbTimeSpent_CheckChanged(object sender, RoutedEventArgs e)
+        {
+            ucClock.ToggleTimeSpentDisplay(cbTimeSpent.IsChecked.GetValueOrDefault());
+        }
+
+        private void cbTargetTime_CheckChanged(object sender, RoutedEventArgs e)
+        {
+            ucClock.ToggleTargetTimeDisplay(cbTargetTime.IsChecked.GetValueOrDefault());
+        }
+
+        private void EnableVisibilityChecboxes(bool enableCheckboxes)
+        {
+            cbMinTime.IsEnabled = enableCheckboxes;
+            cbMaxTime.IsEnabled = enableCheckboxes;
+            cbTimeSpent.IsEnabled = enableCheckboxes;
+            cbTargetTime.IsEnabled = enableCheckboxes;
+        }
+
     }
 }

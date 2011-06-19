@@ -9,30 +9,6 @@
     <Grid Width="300" Height="300" MouseLeftButtonDown="Grid_MouseDown">
         <Image Source="images/clockAnalog.png"></Image>
 
-        <Label Name="lbClockBottom" Foreground="White" Margin="0, 0, 0, 80" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="Auto" Width="Auto">remaining:</Label>
-        <Label Name="lbClockTop"    Foreground="White" Margin="0, 80, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto">time spent:</Label>
-
-        <!-- Second  -->
-        <Rectangle Margin="150,0,148,150" Name="rectangleSecond" Stroke="White" Height="120" VerticalAlignment="Bottom" StrokeThickness="4" >
-            <Rectangle.RenderTransform>
-                <RotateTransform x:Name="secondHand" CenterX="0" CenterY="120" Angle="0" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
-
-        <!-- Minute  -->
-        <Rectangle Margin="150,49,148,151" Name="rectangleMinute" Stroke="LightGreen" StrokeThickness="4" >
-            <Rectangle.RenderTransform>
-                <RotateTransform x:Name="minuteHand" CenterX="0" CenterY="100" Angle="0" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
-
-        <!-- Hour  -->
-        <Rectangle Margin="150,80,148,150" Name="rectangleHour" Stroke="LightYellow" StrokeThickness="4">
-            <Rectangle.RenderTransform>
-                <RotateTransform x:Name="hourHand" CenterX="0" CenterY="70" Angle="0" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
-
         <!-- Start time -->
         <Rectangle Margin="150,80,149,150" Name="rectangleStartTime" Stroke="Red" StrokeThickness="2" Visibility="Hidden">
             <Rectangle.RenderTransform>
@@ -40,13 +16,6 @@
             </Rectangle.RenderTransform>
         </Rectangle>
 
-        <!-- testing -->
-        <Rectangle Margin="150,80,140,150" Stroke="Blue" Visibility="Hidden" >
-            <Rectangle.RenderTransform>
-                <RotateTransform x:Name="bla" CenterX="0" CenterY="70" Angle="30" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        
         <!-- Target time -->
         <Rectangle Margin="150,80,149,150" Name="rectangleTargetTime" Stroke="Green" StrokeThickness="2" Visibility="Hidden">
             <Rectangle.RenderTransform>
@@ -55,7 +24,7 @@
         </Rectangle>
 
         <!-- Min Time (start to end) -->
-        <Path Stroke="MediumBlue" Fill="MediumBlue" Opacity="0.2">
+        <Path Stroke="Yellow" Fill="Yellow" Opacity="0.4" Visibility="Hidden" Name="minTimePath" >
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150" >
@@ -71,7 +40,7 @@
 
         
         <!-- Target time -->
-        <Path Stroke="Magenta" Fill="Magenta" Opacity="0.1">
+        <Path Stroke="SkyBlue" Fill="SkyBlue" Opacity="0.4"  Visibility="Hidden" Name="targetTimePath">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150">
@@ -84,23 +53,8 @@
             </Path.Data>
         </Path>
 
-        <!-- Max time -->
-        <Path Stroke="Red" Fill="Red" Opacity="0.1">
-            <Path.Data>
-                <PathGeometry>
-                    <PathFigure StartPoint="150,150">
-                        <PathFigure.Segments>
-                            <LineSegment Point="150,15" x:Name="maxTimeStartOnCircle" />
-                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,15" SweepDirection="Clockwise" x:Name="maxTimeArc" />
-                        </PathFigure.Segments>
-                    </PathFigure>
-                </PathGeometry>
-            </Path.Data>
-        </Path>
-
-
         <!-- Time Spent -->
-        <Path Stroke="YellowGreen" Fill="YellowGreen" Opacity="0.5">
+        <Path Stroke="Aquamarine" Fill="Aquamarine" Opacity="0.5"  Visibility="Hidden" Name="timeSpentPath">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150">
@@ -113,5 +67,43 @@
             </Path.Data>
         </Path>
 
+        <!-- Max time -->
+        <Path Stroke="Red" Fill="Red" Opacity="0.4"  Visibility="Hidden" Name="maxTimePath">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="150,150">
+                        <PathFigure.Segments>
+                            <LineSegment Point="150,15" x:Name="maxTimeStartOnCircle" />
+                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,15" SweepDirection="Clockwise" x:Name="maxTimeArc" />
+                        </PathFigure.Segments>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+        
+        <!-- Second  -->
+        <Rectangle Margin="150,0,149,150" Name="rectangleSecond" Stroke="MidnightBlue" Height="120" VerticalAlignment="Bottom" StrokeThickness="4" >
+            <Rectangle.RenderTransform>
+                <RotateTransform x:Name="secondHand" CenterX="0" CenterY="120" Angle="0" />
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <!-- Minute  -->
+        <Rectangle Margin="150,49,149,151" Name="rectangleMinute" Stroke="MediumBlue" StrokeThickness="4" >
+            <Rectangle.RenderTransform>
+                <RotateTransform x:Name="minuteHand" CenterX="0" CenterY="100" Angle="0" />
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <!-- Hour  -->
+        <Rectangle Margin="150,80,149,150" Name="rectangleHour" Stroke="Indigo" StrokeThickness="4">
+            <Rectangle.RenderTransform>
+                <RotateTransform x:Name="hourHand" CenterX="0" CenterY="70" Angle="0" />
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+
+        <Label Name="lbClockBottom" Foreground="White" Margin="0, 0, 0, 80" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="Auto" Width="Auto">remaining:</Label>
+        <Label Name="lbClockTop"    Foreground="White" Margin="0, 80, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto">time spent:</Label>
     </Grid>
 </UserControl>

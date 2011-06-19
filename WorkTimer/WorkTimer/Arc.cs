@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace WorkTimer
 {
     public class Arc : AbstractGuiObject
     {
+        public Path Path { get; set; }
         public LineSegment LineSegment { get; set; }
         public ArcSegment ArcSegment { get; set; }
         public DateTime StartTime { get; set; }
@@ -13,9 +15,14 @@ namespace WorkTimer
         public double Radius { get; set; }
         public bool IsLargeArc { get; set; }
         public Point ZeroPos { get; set; }
-
-        public Arc(LineSegment lineSegment, ArcSegment arcSegment, Point zeroPos)
+        public bool Visibility
         {
+            set { Path.Visibility = value ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden; }
+        }
+
+        public Arc(Path path, LineSegment lineSegment, ArcSegment arcSegment, Point zeroPos)
+        {
+            Path = path;
             LineSegment = lineSegment;
             ArcSegment = arcSegment;
             ZeroPos = zeroPos;

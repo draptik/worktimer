@@ -41,10 +41,14 @@
         <WorkTimer:WorkProgressUserControl x:Name="ucProgress" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
         
         <WorkTimer:AnalogClockUserControl x:Name="ucClock" Grid.Row="1" Grid.ColumnSpan="2" />
+
+        <CheckBox Name="cbMinTime" Content="Show Min time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="100,20,400,20" IsEnabled="False" IsChecked="True" Checked="cbMinTime_CheckChanged" Unchecked="cbMinTime_CheckChanged" />
+        <CheckBox Name="cbMaxTime" Content="Show Max time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="100,0,400,0" IsEnabled="False" IsChecked="True" Checked="cbMaxTime_CheckChanged" Unchecked="cbMaxTime_CheckChanged" />
+        <CheckBox Name="cbTimeSpent" Content="Show current time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="250,20,200,20" IsEnabled="False" IsChecked="True" Checked="cbTimeSpent_CheckChanged" Unchecked="cbTimeSpent_CheckChanged"/>
+        <CheckBox Name="cbTargetTime" Content="Show target time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="250,0,200,0" IsEnabled="False" IsChecked="True" Checked="cbTargetTime_CheckChanged" Unchecked="cbTargetTime_CheckChanged"/>
         
         <Button Grid.Row="2" Content="Start" Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="btnUpdate" VerticalAlignment="Top" Width="75" Click="btnUpdate_Click" IsTabStop="True" KeyboardNavigation.TabIndex="1"  />
         <Button Grid.Row="2" Content="Stop" Height="23" HorizontalAlignment="Left" Margin="100,0,0,0" Name="btnStop" VerticalAlignment="Top" Width="75" Click="btnStop_Click" IsEnabled="False" KeyboardNavigation.TabIndex="2"  />
         <Button Grid.Row="2" Content="Exit" Height="23" HorizontalAlignment="Left" Margin="500,0,0,0" Name="btnExit" VerticalAlignment="Top" Width="75" Click="btnExit_Click" KeyboardNavigation.TabIndex="3"  />
-
     </Grid>
 </Window>
