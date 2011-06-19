@@ -70,7 +70,7 @@
         </Path>
 
         <!-- Test -->
-        <!--<Path Stroke="Black" Fill="Blue" Opacity="0.2">
+        <!--<Path Stroke="Red" Fill="Yellow" Opacity="0.2">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150" >
@@ -83,23 +83,8 @@
             </Path.Data>
         </Path>-->
         
-        <!-- Time Spent -->
-        <Path Stroke="Red" Fill="Yellow" Opacity="0.2">
-            <Path.Data>
-                <PathGeometry>
-                    <PathFigure StartPoint="150,150">
-                        <PathFigure.Segments>
-                            <LineSegment Point="150,0" x:Name="timeSpentStartOnCircle" />
-                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,0" SweepDirection="Clockwise" x:Name="timeSpentArc" />
-                        </PathFigure.Segments>
-                    </PathFigure>
-                </PathGeometry>
-            </Path.Data>
-            <!--<Path.RenderTransform><RotateTransform CenterX="100" CenterY="100" Angle="60" /></Path.RenderTransform>-->
-        </Path>
-
         <!-- Target time -->
-        <Path Stroke="Red" Fill="Magenta" Opacity="0.1">
+        <Path Stroke="Yellow" Fill="Magenta" Opacity="0.1">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150">
@@ -113,7 +98,7 @@
         </Path>
 
         <!-- Max time -->
-        <Path Stroke="Red" Fill="Orange" Opacity="0.1">
+        <Path Stroke="Red" Fill="Red" Opacity="0.1">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="150,150">
@@ -125,5 +110,22 @@
                 </PathGeometry>
             </Path.Data>
         </Path>
+
+
+        <!-- Time Spent -->
+        <Path Stroke="Green" Fill="Green" Opacity="0.5">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="150,150">
+                        <PathFigure.Segments>
+                            <LineSegment Point="150,0" x:Name="timeSpentStartOnCircle" />
+                            <ArcSegment IsLargeArc="True" Size="135, 135" Point="150,0" SweepDirection="Clockwise" x:Name="timeSpentArc" />
+                        </PathFigure.Segments>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+            <!--<Path.RenderTransform><RotateTransform CenterX="100" CenterY="100" Angle="60" /></Path.RenderTransform>-->
+        </Path>
+
     </Grid>
 </UserControl>

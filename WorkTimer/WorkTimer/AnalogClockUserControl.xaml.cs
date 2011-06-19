@@ -67,20 +67,20 @@ namespace WorkTimer
         private void InitStartTime(WorkTime workTime)
         {
             StartTimeRotation.Angle = GetAngle(workTime.StartTime);
-            rectangleStartTime.Visibility = Visibility.Visible;
+            rectangleStartTime.Visibility = Visibility.Hidden;
         }
 
         private void InitTargetTime(WorkTime workTime, double radius)
         {
             TargetTimeRotation.Angle = GetAngle(workTime.TargetTime);
-            rectangleTargetTime.Visibility = Visibility.Visible;
+            rectangleTargetTime.Visibility = Visibility.Hidden;
 
-            InitArc(targetTimeStartOnCircle, targetTimeArc, workTime.StartTime, workTime.MaxTime, radius, true);
+            InitArc(targetTimeStartOnCircle, targetTimeArc, workTime.StartTime, workTime.TargetTime, radius, true);
         }
 
         private void InitMaxTime(WorkTime workTime, double radius)
         {
-            InitArc(maxTimeStartOnCircle, maxTimeArc, workTime.TargetTime, workTime.TargetTime, radius, false);
+            InitArc(maxTimeStartOnCircle, maxTimeArc, workTime.TargetTime, workTime.MaxTime, radius, false);
         }
 
         private void InitMinTime(WorkTime workTime, double radius)

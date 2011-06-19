@@ -7,7 +7,7 @@
              d:DesignHeight="95" d:DesignWidth="420">
     <Grid Name="gridMain">
         <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctMain" Stroke="Black" VerticalAlignment="Top" Width="400" />
-        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctCurrent" Stroke="Black" VerticalAlignment="Top" Width="0" Fill="Yellow" />
-        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctMinTime" Stroke="Black" VerticalAlignment="Top" Width="0" Fill="LightBlue" Visibility="Hidden" />
+        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctCurrent" Stroke="Black" VerticalAlignment="Top" Width="0" Fill="Green" />
+        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctMinTime" Stroke="Black" VerticalAlignment="Top" Width="0" Fill="Blue" Visibility="Hidden" />
     </Grid>
 </UserControl>
