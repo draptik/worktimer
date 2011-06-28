@@ -62,6 +62,14 @@ namespace WorkTimer.Test
             var result = timeSpan.ToDisplayString();
             Assert.AreEqual("-00:00:59", result);
         }
+
+        [Test]
+        public void TestToDisplayString_WorkedMoreThanADay()
+        {
+            var timeSpan = new TimeSpan(1, 0, 0, 1); // 1 day, 1 second
+            var result = timeSpan.ToDisplayString();
+            Assert.AreEqual("24:00:01", result);
+        }
     }
 
 

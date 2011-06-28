@@ -10,12 +10,20 @@ namespace WorkTimer
 
             var hours = timeSpan.Hours;
             if (timeSpan.Days < 0 && timeSpan.Hours < 0) {
-                hours = Math.Abs(timeSpan.Hours + (timeSpan.Days*24));
+                hours = GetTotalHours(timeSpan);
                 sign = "-";
+            }
+            if (timeSpan.TotalHours >= 24) {
+                hours = GetTotalHours(timeSpan);
             }
 
             return string.Format("{0}{1:00}:{2:00}:{3:00}", sign, hours, Math.Abs(timeSpan.Minutes),
                                  Math.Abs(timeSpan.Seconds));
+        }
+
+        private static int GetTotalHours(TimeSpan timeSpan)
+        {
+            return Math.Abs(timeSpan.Hours + (timeSpan.Days * 24));
         }
 
         public static bool IsNullOrEmpty(this string s)

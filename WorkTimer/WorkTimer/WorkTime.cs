@@ -71,6 +71,21 @@ namespace WorkTimer
 
             var validStartTime = ValidateStartTimeFormat(startTimeString);
             var startDateTime = InitStartDateTime(validStartTime, startDate);
+            Init(startDateTime);
+        }
+
+        public WorkTime(IClock clock, DateTime startDateTime)
+        {
+            _clock = clock; // unit testing 
+            Init(startDateTime);
+        }
+
+        #endregion
+
+        #region Private
+
+        private void Init(DateTime startDateTime)
+        {
             if (IsStartDateTimeInFuture(startDateTime)) {
                 throw new ArgumentException("Invalid start time (start time is in future)!");
             }
@@ -82,10 +97,6 @@ namespace WorkTimer
         {
             return startDateTime > _clock.Now;
         }
-
-        #endregion
-
-        #region Private
 
         private DateTime ValidateStartTimeFormat(string startTimeString)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -9,7 +10,7 @@ namespace WorkTimer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
 
         #region Fields
@@ -22,6 +23,24 @@ namespace WorkTimer
         private readonly Color _okBackgroundColor = Colors.LightGreen;
         private readonly Color _warnForgroundColor = Colors.Red;
         private Brush _defaultBackground;
+
+        private const string TimeFormat = "H:mm";
+        private readonly CultureInfo _currentCultureInfo = new CultureInfo("de-DE");
+        
+        public DateTime? StartDateTime
+        {
+            get
+            {
+                DateTime result = null;
+                if (!tbTimeStart.Text.IsNullOrEmpty()) {
+                    DateTime startTime;
+                    if (DateTime.TryParseExact(tbTimeStart.Text, TimeFormat, _currentCultureInfo, DateTimeStyles.None, out startTime)) {
+                        result = startTime;
+                    }
+                }
+                return result;
+            }
+        }
 
         #endregion
         
@@ -110,13 +129,12 @@ namespace WorkTimer
             _defaultBackground = gbTimes.Background;
         }
 
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             if (!IsValidStartTime()) {
                 ShowErrorDlg();
                 return;
             }
-
             
             try {
                 InitClock();
@@ -150,7 +168,6 @@ namespace WorkTimer
                 }
             }
         }
-
 
         void dispatcherTimer_Tick(object sender, EventArgs e)
         {
