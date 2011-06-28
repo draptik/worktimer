@@ -21,20 +21,21 @@
             <Grid>
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="120,8,0,0" Name="tbTimeStart" VerticalAlignment="Top" Width="60" HorizontalContentAlignment="Right" IsTabStop="True" KeyboardNavigation.TabIndex="0" />
                 <Label Content="Startzeit (HH:MM):" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lbTimeStart" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="120,42,0,0" Name="tbTimeTarget" VerticalAlignment="Top" Width="60" IsReadOnly="True" TextAlignment="Right" IsTabStop="False" />
-                <Label Content="Gehen (normal):" Height="28" HorizontalAlignment="Left" Margin="19,40,0,0" Name="lbTimeTarget" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="120,76,0,0" Name="tbTimeTargetRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
-                <Label Content="Restzeit (normal):" Height="28" HorizontalAlignment="Left" Margin="12,74,0,0" Name="lbTimeTargetRemaining" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="276,8,0,0" Name="tbBalance" VerticalAlignment="Top" Width="60" IsReadOnly="True" IsTabStop="False" />
-                <Label Content="Saldo:" Height="28" HorizontalAlignment="Left" Margin="228,8,0,0" Name="lbBalance" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="276,42,0,0" Name="tbMinTime" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
-                <Label Content="Gehen (min):" Height="28" HorizontalAlignment="Left" Margin="192,0,0,39" Name="lbMinTime" VerticalAlignment="Bottom" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="276,76,0,0" Name="tbMinTimeRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
-                <Label Content="Restzeit (min):" Height="28" HorizontalAlignment="Left" Margin="186,74,0,0" Name="lbMinTimeRemaining" VerticalAlignment="Top" />
-                <TextBox HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="432,42,0,42" Name="tbMaxTime" Width="60" IsReadOnly="True" IsTabStop="False" />
-                <Label Content="Gehen (max):" Height="28" HorizontalAlignment="Left" Margin="349,40,0,0" Name="lbMaxTime" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="432,76,0,0" Name="tbMaxTimeRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
-                <Label Content="Restzeit (max):" Height="28" HorizontalAlignment="Left" Margin="342,74,0,0" Name="lbMaxTimeRemaining" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="320,40,0,0" Name="tbTimeTarget" VerticalAlignment="Top" Width="60" IsReadOnly="True" TextAlignment="Right" IsTabStop="False" />
+                <Label Content="Gehen (normal):" Height="28" HorizontalAlignment="Left" Margin="218,38,0,0" Name="lbTimeTarget" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="320,74,0,0" Name="tbTimeTargetRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
+                <Label Content="Restzeit (normal):" Height="28" HorizontalAlignment="Left" Margin="211,72,0,0" Name="lbTimeTargetRemaining" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="505,6,0,0" Name="tbBalance" VerticalAlignment="Top" Width="60" IsReadOnly="True" IsTabStop="False" />
+                <Label Content="Saldo:" Height="28" HorizontalAlignment="Left" Margin="457,6,0,0" Name="lbBalance" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="120,40,0,0" Name="tbMinTime" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
+                <Label Content="Gehen (min):" Height="28" HorizontalAlignment="Left" Margin="36,0,0,41" Name="lbMinTime" VerticalAlignment="Bottom" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="120,74,0,0" Name="tbMinTimeRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
+                <Label Content="Restzeit (min):" Height="28" HorizontalAlignment="Left" Margin="30,72,0,0" Name="lbMinTimeRemaining" VerticalAlignment="Top" />
+                <TextBox HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="503,40,0,44" Name="tbMaxTime" Width="60" IsReadOnly="True" IsTabStop="False" />
+                <Label Content="Gehen (max):" Height="28" HorizontalAlignment="Left" Margin="420,38,0,0" Name="lbMaxTime" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="505,74,0,0" Name="tbMaxTimeRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
+                <Label Content="Restzeit (max):" Height="28" HorizontalAlignment="Left" Margin="415,72,0,0" Name="lbMaxTimeRemaining" VerticalAlignment="Top" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="211,7,0,0" Name="datePickerStartDate" VerticalAlignment="Top" Width="115" />
             </Grid>
         </GroupBox>
 

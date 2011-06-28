@@ -7,14 +7,14 @@ namespace WorkTimer.Test
     public class WorkTimeTest
     {
         private WorkTime _workTime;
-        private WorkTime w;
+        private WorkTime _w;
         private IClock _clock;
 
         [SetUp]
         public void Setup()
         {
             _clock = new StaticClock();
-            w = new WorkTime(_clock, "8:00");
+            _w = new WorkTime(_clock, "8:00");
         }
 
         #region StartTime
@@ -44,21 +44,21 @@ namespace WorkTimer.Test
         [Test, ExpectedException(typeof(ArgumentException))]
         public void StartTime_InputTimeInvalid_String()
         {
-            var inValidInput = "invalid";
+            const string inValidInput = "invalid";
             _workTime = new WorkTime(_clock, inValidInput);
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
         public void StartTime_InputTimeInvalid_TooSmall()
         {
-            var inValidInput = "-8:00";
+            const string inValidInput = "-8:00";
             _workTime = new WorkTime(_clock, inValidInput);
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
         public void StartTime_InputTimeInvalid_TooLarge()
         {
-            var inValidInput = "25:00";
+            const string inValidInput = "25:00";
             _workTime = new WorkTime(_clock, inValidInput);
         }
 
@@ -66,7 +66,7 @@ namespace WorkTimer.Test
         [Test, ExpectedException(typeof(ArgumentException))]
         public void StartTime_InputTimeInvalid_WrongFormat_Point()
         {
-            var inValidInput = "8.00";
+            const string inValidInput = "8.00";
             _workTime = new WorkTime(_clock, inValidInput);
         }
 
@@ -79,15 +79,25 @@ namespace WorkTimer.Test
         [Test]
         public void TargetTime_IsNotNull_For_Valid_StartTime()
         {
-            var targetTime =_workTime.TargetTime;
+            var targetTime = _workTime.TargetTime;
             Assert.IsNotNull(targetTime);
         }
 
         [Test]
         public void TargetTime_IsCorrect_For_Valid_StartTime()
         {
-            var targetTime = w.TargetTime;
-            Assert.AreEqual(w.StartTime + new TimeSpan(8, 45, 0), targetTime);
+            var targetTime = _w.TargetTime;
+            Assert.AreEqual(_w.StartTime + new TimeSpan(8, 45, 0), targetTime);
+        }
+
+        [Test]
+        public void TargetTime_With_StartTime_TwoDaysAgo()
+        {
+            IClock currentTime = new StaticClock(new DateTime(2011, 06, 10, 11, 0, 0));
+            var startDate = new DateTime(2011, 06, 9);
+            var workTime = new WorkTime(currentTime, "8:00", startDate);
+            var expectedTargetTime = startDate.Add(new TimeSpan(16, 45, 0));
+            Assert.AreEqual(expectedTargetTime, workTime.TargetTime);
         }
 
         #endregion
@@ -97,8 +107,18 @@ namespace WorkTimer.Test
         [Test]
         public void RemainingTimeTarget()
         {
-            var expected = w.TargetTime - _clock.Now;
-            Assert.AreEqual(expected, w.RemainingTillTarget);
+            var expected = _w.TargetTime - _clock.Now;
+            Assert.AreEqual(expected, _w.RemainingTillTarget);
+        }
+
+        [Test]
+        public void RemainingTimeTarget_With_StartTime_TwoDaysAgo()
+        {
+            IClock currentTime = new StaticClock(new DateTime(2011, 06, 10, 11, 0, 0));
+            var startDate = new DateTime(2011, 06, 9);
+            var workTime = new WorkTime(currentTime, "8:00", startDate);
+            var expectedRemainingTargetTime = new TimeSpan(-18, -15, 0);
+            Assert.AreEqual(expectedRemainingTargetTime, workTime.RemainingTillTarget);
         }
 
         #endregion
@@ -108,8 +128,18 @@ namespace WorkTimer.Test
         [Test]
         public void CurrentTimeSpent()
         {
-            var expected = w.TargetTimeSpan - w.RemainingTillTarget;
-            Assert.AreEqual(expected, w.TimeSpent);
+            var expected = _w.TargetTimeSpan - _w.RemainingTillTarget;
+            Assert.AreEqual(expected, _w.TimeSpent);
+        }
+
+        [Test]
+        public void CurrentTimeSpent_With_StartTime_TwoDaysAgo()
+        {
+            IClock currentTime = new StaticClock(new DateTime(2011, 06, 10, 11, 0, 0));
+            var startDate = new DateTime(2011, 06, 9);
+            var workTime = new WorkTime(currentTime, "8:00", startDate);
+            const double expectedCurrentTimeSpent = 27d;
+            Assert.AreEqual(expectedCurrentTimeSpent, workTime.TimeSpent.TotalHours);
         }
 
         #endregion
@@ -120,22 +150,22 @@ namespace WorkTimer.Test
         [Test]
         public void MinTimeStart()
         {
-            var expected = w.StartTime.AddHours(6);
-            Assert.AreEqual(expected, w.MinTimeStart);
+            var expected = _w.StartTime.AddHours(6);
+            Assert.AreEqual(expected, _w.MinTimeStart);
         }
 
         [Test]
         public void MinTimeEnd()
         {
-            var expected = w.StartTime.AddHours(6).AddMinutes(45);
-            Assert.AreEqual(expected, w.MinTimeEnd);
+            var expected = _w.StartTime.AddHours(6).AddMinutes(45);
+            Assert.AreEqual(expected, _w.MinTimeEnd);
         }
 
         [Test]
         public void TimeTillMinTime()
         {
-            var expected = w.MinTimeStart.Subtract(_clock.Now);
-            Assert.AreEqual(expected, w.RemainingTillMinTime);
+            var expected = _w.MinTimeStart.Subtract(_clock.Now);
+            Assert.AreEqual(expected, _w.RemainingTillMinTime);
         }
 
         #endregion
@@ -145,15 +175,15 @@ namespace WorkTimer.Test
         [Test]
         public void MaxTime()
         {
-            var expected = w.StartTime.AddHours(10).AddMinutes(45);
-            Assert.AreEqual(expected, w.MaxTime);
+            var expected = _w.StartTime.AddHours(10).AddMinutes(45);
+            Assert.AreEqual(expected, _w.MaxTime);
         }
 
         [Test]
         public void TimeTillMaxTime()
         {
-            var expected = w.MaxTime.Subtract(_clock.Now);
-            Assert.AreEqual(expected, w.RemainingTillMaxTime);
+            var expected = _w.MaxTime.Subtract(_clock.Now);
+            Assert.AreEqual(expected, _w.RemainingTillMaxTime);
         }
 
         [Test]
@@ -226,6 +256,18 @@ namespace WorkTimer.Test
             IClock workedTooShort = new StaticClock(new DateTime(2011, 06, 10, 19, 30, 0));
             var workTime = new WorkTime(workedTooShort, "8:00");
             var minusTime = new TimeSpan(2, 0, 0);
+            Assert.AreEqual(minusTime, workTime.Balance);
+        }
+
+        [Test]
+        public void TargetTime_NextDay()
+        {
+            // current time: 00:05
+            // start time: 23:00 (previous day)
+            IClock currentTime = new StaticClock(new DateTime(2011, 06, 10, 0, 5, 0));
+            var startDate = new DateTime(2011, 06, 9);
+            var workTime = new WorkTime(currentTime, "23:00", startDate);
+            var minusTime = new TimeSpan(-6, -55, 0);
             Assert.AreEqual(minusTime, workTime.Balance);
         }
 

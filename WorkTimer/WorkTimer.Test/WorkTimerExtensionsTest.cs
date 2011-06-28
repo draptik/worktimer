@@ -39,6 +39,29 @@ namespace WorkTimer.Test
             Assert.AreEqual("00:00:00", result);
         }
 
+        [Test]
+        public void TestToDisplayString_NegativeDays()
+        {
+            var timeSpan = new TimeSpan(-1, -23, -59, -59);
+            var result = timeSpan.ToDisplayString();
+            Assert.AreEqual("-47:59:59", result);
+        }
+
+        [Test]
+        public void TestToDisplayString_NegativeDaysSmall()
+        {
+            var timeSpan = new TimeSpan(0, -23, -59, -59);
+            var result = timeSpan.ToDisplayString();
+            Assert.AreEqual("-23:59:59", result);
+        }
+
+        [Test]
+        public void TestToDisplayString_NegativeDaysVerySmall()
+        {
+            var timeSpan = new TimeSpan(0, 0, 0, -59);
+            var result = timeSpan.ToDisplayString();
+            Assert.AreEqual("-00:00:59", result);
+        }
     }
 
 

@@ -29,6 +29,7 @@ namespace WorkTimer
         public MainWindow()
         {
             InitializeComponent();
+            InitStartDate();
             InitTrayIcon();
         }
 
@@ -117,18 +118,20 @@ namespace WorkTimer
             }
 
             
-            try
-            {
+            try {
                 InitClock();
             }
-            catch (Exception exception)
-            {
+            catch (Exception exception) {
                 ShowErrorDlg();
             }
             StartDispatcher();
         }
 
-        
+        private void InitStartDate()
+        {
+            datePickerStartDate.Text = DateTime.Today.ToShortDateString();
+        }
+
 
         private void InitClock()
         {
