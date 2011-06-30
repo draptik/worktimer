@@ -31,7 +31,7 @@ namespace WorkTimer
         {
             get
             {
-                DateTime result = null;
+                DateTime? result = null;
                 if (!tbTimeStart.Text.IsNullOrEmpty()) {
                     DateTime startTime;
                     if (DateTime.TryParseExact(tbTimeStart.Text, TimeFormat, _currentCultureInfo, DateTimeStyles.None, out startTime)) {
@@ -330,7 +330,7 @@ namespace WorkTimer
         private void ToggleStartStopButtons()
         {
             if (_dispatcherTimer == null) return;
-            if (btnUpdate != null) { btnUpdate.IsEnabled = !_dispatcherTimer.IsEnabled; }
+            if (btnStart != null) { btnStart.IsEnabled = !_dispatcherTimer.IsEnabled; }
             if (btnStop != null) { btnStop.IsEnabled = _dispatcherTimer.IsEnabled; }
         }
 

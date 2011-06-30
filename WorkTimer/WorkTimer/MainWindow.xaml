@@ -48,7 +48,7 @@
         <CheckBox Name="cbTimeSpent" Content="Show current time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="250,30,200,30" IsEnabled="False" IsChecked="True" Checked="cbTimeSpent_CheckChanged" Unchecked="cbTimeSpent_CheckChanged"/>
         <CheckBox Name="cbTargetTime" Content="Show target time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="250,10,200,10" IsEnabled="False" IsChecked="True" Checked="cbTargetTime_CheckChanged" Unchecked="cbTargetTime_CheckChanged"/>
         
-        <Button Grid.Row="2" Content="Start" Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="btnUpdate" VerticalAlignment="Top" Width="75" Click="btnUpdate_Click" IsTabStop="True" KeyboardNavigation.TabIndex="1"  />
+        <Button Grid.Row="2" Content="Start" Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="btnStart" VerticalAlignment="Top" Width="75" Click="btnStart_Click" IsTabStop="True" KeyboardNavigation.TabIndex="1"  />
         <Button Grid.Row="2" Content="Stop" Height="23" HorizontalAlignment="Left" Margin="100,0,0,0" Name="btnStop" VerticalAlignment="Top" Width="75" Click="btnStop_Click" IsEnabled="False" KeyboardNavigation.TabIndex="2"  />
         <Button Grid.Row="2" Content="Exit" Height="23" HorizontalAlignment="Left" Margin="500,0,0,0" Name="btnExit" VerticalAlignment="Top" Width="75" Click="btnExit_Click" KeyboardNavigation.TabIndex="3"  />
     </Grid>
