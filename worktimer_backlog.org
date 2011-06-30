@@ -7,12 +7,12 @@
 * TODO ID 003: Create user control for buttons
 * TODO ID 004: Create user control for checkboxes
 * TODO ID 005: Create Groupbox for checkboxes
-* TODO ID 006: Refactor to MVP
+* DONE ID 006: Refactor to Projects
 * TODO ID 007: Let user choose all colors
 * TODO [#A] ID 008: Add "flashy" warning if user works too long
 * DONE ID 009: Add Config class
 * TODO ID 010: Take previous day as input before throwing "Future date" exception
-* TODO ID 011: Handle worktime passing dates
+* DONE ID 011: Handle worktime passing dates
 * TODO ID 012: Add time below progress bar hour lines
 * TODO ID 013: Better Error checking for invalid input
 * TODO ID 014: Better Error Messages for invalid input
