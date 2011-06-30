@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WorkTimer
+namespace WorkTimer.Common
 {
     public static class WorkTimerExtensions
     {

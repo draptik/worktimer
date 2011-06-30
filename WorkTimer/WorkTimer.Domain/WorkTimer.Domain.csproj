@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EF97ED5F-9186-4031-A692-6C58D18F40CF}</ProjectGuid>
+    <ProjectGuid>{BBE18BAE-2858-486A-8E14-F4C6857310AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WorkTimer.Test</RootNamespace>
-    <AssemblyName>WorkTimer.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>WorkTimer.Domain</RootNamespace>
+    <AssemblyName>WorkTimer.Domain</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\..\Library\NUnit\2.5.10.11092\bin\net-2.0\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,23 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WorkTimerExtensionsTest.cs" />
-    <Compile Include="WorkTimeTest.cs" />
+    <Compile Include="Clock\IClock.cs" />
+    <Compile Include="Clock\StaticClock.cs" />
+    <Compile Include="Clock\SystemClock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WorkTimer.Common\WorkTimer.Common.csproj">
-      <Project>{3EBD6B64-BBF3-4264-8971-C8F17720BC7A}</Project>
-      <Name>WorkTimer.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WorkTimer.Domain\WorkTimer.Domain.csproj">
-      <Project>{BBE18BAE-2858-486A-8E14-F4C6857310AC}</Project>
-      <Name>WorkTimer.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WorkTimer.Gui\WorkTimer.Gui.csproj">
-      <Project>{D32241FB-2531-4E5C-AB5C-BC5109A8FC18}</Project>
-      <Name>WorkTimer.Gui</Name>
-    </ProjectReference>
+    <Compile Include="WorkTime.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

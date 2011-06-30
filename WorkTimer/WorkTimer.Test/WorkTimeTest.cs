@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using WorkTimer.Domain;
 
 namespace WorkTimer.Test
 {
