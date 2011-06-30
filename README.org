@@ -8,5 +8,5 @@
 ** Usage
    Enter Start time and press start button.
 ** Upcoming Features
-*** GUI pimp
+*** GUI pimp 
 
