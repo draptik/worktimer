@@ -8,9 +8,9 @@ using Rect = WorkTimer.Gui.Shapes.Rect;
 namespace WorkTimer.Gui.Controls
 {
     /// <summary>
-    /// Interaction logic for WorkProgressUserControl.xaml
+    /// Interaction logic for WorkProgress.xaml
     /// </summary>
-    public partial class WorkProgressUserControl : UserControl
+    public partial class WorkProgress
     {
         private const double BreakTime    = 0.75;
         private const double TargetTime   = 8.75;
@@ -23,7 +23,7 @@ namespace WorkTimer.Gui.Controls
         private Rect _rectMaxTime;
         private Rect _rectTargetTime;
 
-        public WorkProgressUserControl()
+        public WorkProgress()
         {
             InitializeComponent();
         }

@@ -89,20 +89,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
-    <Compile Include="Controls\AnalogClockUserControl.xaml.cs">
-      <DependentUpon>AnalogClockUserControl.xaml</DependentUpon>
+    <Compile Include="Controls\AnalogClock.xaml.cs">
+      <DependentUpon>AnalogClock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\WorkProgressUserControl.xaml.cs">
-      <DependentUpon>WorkProgressUserControl.xaml</DependentUpon>
+    <Compile Include="Controls\WorkProgress.xaml.cs">
+      <DependentUpon>WorkProgress.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shapes\AbstractGuiObject.cs" />
     <Compile Include="Shapes\Arc.cs" />
     <Compile Include="Shapes\Rect.cs" />
-    <Page Include="Controls\AnalogClockUserControl.xaml">
+    <Page Include="Controls\AnalogClock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\WorkProgressUserControl.xaml">
+    <Page Include="Controls\WorkProgress.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

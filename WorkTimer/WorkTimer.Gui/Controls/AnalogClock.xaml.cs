@@ -12,11 +12,11 @@ using Rect = WorkTimer.Gui.Shapes.Rect;
 namespace WorkTimer.Gui.Controls
 {
     /// <summary>
-    /// Interaction logic for AnalogClockUserControl.xaml
+    /// Interaction logic for AnalogClock.xaml
     /// 
     /// http://www.codeproject.com/KB/WPF/WpfClock.aspx
     /// </summary>
-    public partial class AnalogClockUserControl
+    public partial class AnalogClock
     {
         private const double RadiusMinTime = 110d;
         private const double RadiusTimeSpent = 135d;
@@ -31,7 +31,7 @@ namespace WorkTimer.Gui.Controls
         private DateTime _startTime;
         private Config _config;
 
-        public AnalogClockUserControl()
+        public AnalogClock()
         {
             InitializeComponent();
             _timer.Elapsed += timer_Elapsed;
