@@ -6,8 +6,10 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using WorkTimer.Common;
 using WorkTimer.Domain;
+using WorkTimer.Gui.Shapes;
+using Rect = WorkTimer.Gui.Shapes.Rect;
 
-namespace WorkTimer
+namespace WorkTimer.Gui
 {
     /// <summary>
     /// Interaction logic for AnalogClockUserControl.xaml

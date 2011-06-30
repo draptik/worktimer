@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace WorkTimer
+namespace WorkTimer.Gui
 {
     public class Config
     {

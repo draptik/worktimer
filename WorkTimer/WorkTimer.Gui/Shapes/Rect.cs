@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace WorkTimer
+namespace WorkTimer.Gui.Shapes
 {
     public class Rect : AbstractGuiObject
     {

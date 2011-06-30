@@ -88,13 +88,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AbstractGuiObject.cs" />
     <Compile Include="AnalogClockUserControl.xaml.cs">
       <DependentUpon>AnalogClockUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Arc.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="Rect.cs" />
+    <Compile Include="Shapes\AbstractGuiObject.cs" />
+    <Compile Include="Shapes\Arc.cs" />
+    <Compile Include="Shapes\Rect.cs" />
     <Compile Include="WorkProgressUserControl.xaml.cs">
       <DependentUpon>WorkProgressUserControl.xaml</DependentUpon>
     </Compile>

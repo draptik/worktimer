@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace WorkTimer
+namespace WorkTimer.Gui.Shapes
 {
     public abstract class AbstractGuiObject
     {

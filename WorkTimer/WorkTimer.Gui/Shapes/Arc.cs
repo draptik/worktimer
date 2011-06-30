@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Ink;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace WorkTimer
+namespace WorkTimer.Gui.Shapes
 {
     public class Arc : AbstractGuiObject
     {

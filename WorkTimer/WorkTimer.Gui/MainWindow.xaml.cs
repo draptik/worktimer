@@ -7,7 +7,7 @@ using System.Windows.Threading;
 using WorkTimer.Common;
 using WorkTimer.Domain;
 
-namespace WorkTimer
+namespace WorkTimer.Gui
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
