@@ -88,19 +88,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AnalogClockUserControl.xaml.cs">
+    <Compile Include="Config.cs" />
+    <Compile Include="Controls\AnalogClockUserControl.xaml.cs">
       <DependentUpon>AnalogClockUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Config.cs" />
+    <Compile Include="Controls\WorkProgressUserControl.xaml.cs">
+      <DependentUpon>WorkProgressUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shapes\AbstractGuiObject.cs" />
     <Compile Include="Shapes\Arc.cs" />
     <Compile Include="Shapes\Rect.cs" />
-    <Compile Include="WorkProgressUserControl.xaml.cs">
-      <DependentUpon>WorkProgressUserControl.xaml</DependentUpon>
-    </Compile>
-    <Page Include="AnalogClockUserControl.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\AnalogClockUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\WorkProgressUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -114,10 +118,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="WorkProgressUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -160,6 +160,7 @@
       <Name>WorkTimer.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

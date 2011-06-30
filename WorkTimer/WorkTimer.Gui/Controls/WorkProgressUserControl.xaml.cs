@@ -5,7 +5,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Rect = WorkTimer.Gui.Shapes.Rect;
 
-namespace WorkTimer.Gui
+namespace WorkTimer.Gui.Controls
 {
     /// <summary>
     /// Interaction logic for WorkProgressUserControl.xaml

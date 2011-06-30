@@ -9,7 +9,7 @@ using WorkTimer.Domain;
 using WorkTimer.Gui.Shapes;
 using Rect = WorkTimer.Gui.Shapes.Rect;
 
-namespace WorkTimer.Gui
+namespace WorkTimer.Gui.Controls
 {
     /// <summary>
     /// Interaction logic for AnalogClockUserControl.xaml
