@@ -23,21 +23,6 @@ namespace WorkTimer.Gui
         private Config _config;
         private const string TitleString = "Should I Stay Or Should I Go Now";
 
-        //public DateTime? StartDateTime
-        //{
-        //    get
-        //    {
-        //        DateTime? result = null;
-        //        if (!ucTimeAsText.tbTimeStart.Text.IsNullOrEmpty()) {
-        //            DateTime startTime;
-        //            if (DateTime.TryParseExact(ucTimeAsText.tbTimeStart.Text, _config.TimeFormat, _config.CurrentCultureInfo, DateTimeStyles.None, out startTime)) {
-        //                result = startTime;
-        //            }
-        //        }
-        //        return result;
-        //    }
-        //}
-
         #endregion
         
 
