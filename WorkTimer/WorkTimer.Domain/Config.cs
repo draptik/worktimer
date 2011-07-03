@@ -35,8 +35,8 @@ namespace WorkTimer.Domain
             
             WarningTimeSpanMax  = new TimeSpan(0, 30, 0);
             CurrentCultureInfo  = new CultureInfo("de-DE");
-            
-            TimeFormat          = "H:mm";
+
+            TimeFormat = "H:mm";
 
             BreakTimeNum    = 0.75;
             TargetTimeNum   = 8.75;
