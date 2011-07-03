@@ -152,6 +152,7 @@ namespace WorkTimer.Gui
         private void UpdateWarnings(WorkTime workTime)
         {
             ucTimeAsText.UpdateWarnings(workTime);
+            //  TODO SHOMETHING REALLY FLASHY HERE
         }
 
         private void UpdateTrayIcon(WorkTime workTime)
