@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:WorkTimer="clr-namespace:WorkTimer.Gui" xmlns:Gui="clr-namespace:WorkTimer.Gui" xmlns:Controls="clr-namespace:WorkTimer.Gui.Controls" 
         Title="Should I Stay Or Should I Go Now..." 
-        Height="700" 
+        Height="670" 
         Width="625" 
         Loaded="Window_Loaded" 
         FocusManager.FocusedElement="{Binding ElementName=tbTimeStart}"
