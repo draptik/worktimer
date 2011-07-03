@@ -16,7 +16,6 @@ namespace WorkTimer.Gui.Controls
         private Config _config;
         private Rect _rectTimeSpent;
         private Rect _rectMinTime;
-        //private Rect _rectMaxTime;
         private Line _lineTargetTime;
 
         public WorkProgress()
@@ -34,6 +33,11 @@ namespace WorkTimer.Gui.Controls
 
         public void UpdateCurrentPos(TimeSpan timeSpent)
         {
+            var maxTimeSpan = _config.MaxTimeSpan;
+            if (timeSpent > maxTimeSpan) {
+                timeSpent = maxTimeSpan;
+            }
+
             _rectTimeSpent = new Rect(rctCurrent)
                              {
                                  Color = _config.TimeSpentBrush,

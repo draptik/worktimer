@@ -9,7 +9,7 @@ namespace WorkTimer.Domain
 
         private readonly IClock _clock; // unit testing
 
-        private Config _config;
+        private readonly Config _config;
 
         #endregion
 
@@ -40,6 +40,16 @@ namespace WorkTimer.Domain
             _config = Config.GetInstance();
             _clock = clock; // unit testing 
             Init(startDateTime);
+        }
+
+        public WorkTime(DateTime? startDateTime)
+        {
+            _config = Config.GetInstance();
+            _clock = new SystemClock();
+
+            if (startDateTime.HasValue) {
+                Init((DateTime)startDateTime);
+            }
         }
 
         #endregion

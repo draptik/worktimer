@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="600">
+             d:DesignHeight="150" d:DesignWidth="600" xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+             FocusManager.FocusedElement="{Binding ElementName=dateTimePicker1}">
     <Grid>
         <GroupBox Grid.Row="0" Header="Zeiten" Height="130" HorizontalAlignment="Left" Margin="12,12,0,0" Name="gbTimes" VerticalAlignment="Top" Width="579">
             <Grid>
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="120,8,0,0" Name="tbTimeStart" VerticalAlignment="Top" Width="60" HorizontalContentAlignment="Right" IsTabStop="True" KeyboardNavigation.TabIndex="0" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="16,38,0,0" Name="tbTimeStart" VerticalAlignment="Top" Width="14" HorizontalContentAlignment="Right" IsTabStop="True" KeyboardNavigation.TabIndex="0" Visibility="Hidden" />
                 <Label Content="Startzeit (HH:MM):" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lbTimeStart" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="320,40,0,0" Name="tbTimeTarget" VerticalAlignment="Top" Width="60" IsReadOnly="True" TextAlignment="Right" IsTabStop="False" />
                 <Label Content="Gehen (normal):" Height="28" HorizontalAlignment="Left" Margin="218,38,0,0" Name="lbTimeTarget" VerticalAlignment="Top" />
@@ -24,7 +25,10 @@
                 <Label Content="Gehen (max):" Height="28" HorizontalAlignment="Left" Margin="420,38,0,0" Name="lbMaxTime" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="505,74,0,0" Name="tbMaxTimeRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
                 <Label Content="Restzeit (max):" Height="28" HorizontalAlignment="Left" Margin="415,72,0,0" Name="lbMaxTimeRemaining" VerticalAlignment="Top" />
-                <DatePicker Height="25" HorizontalAlignment="Left" Margin="211,7,0,0" Name="datePickerStartDate" VerticalAlignment="Top" Width="115" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="281,7,0,0" Name="datePickerStartDate" VerticalAlignment="Top" Width="45" Visibility="Hidden" />
+                <extToolkit:TimePicker HorizontalAlignment="Left" Margin="340,7,0,0" Name="timePickerStart" VerticalAlignment="Top" Width="94" Visibility="Hidden" />
+                <extToolkit:DateTimePicker HorizontalAlignment="Left" Margin="120,7,0,0" Name="dateTimePicker1" VerticalAlignment="Top" Width="260"  />
+                <!--<extToolkit:DateTimeUpDown Value="{Binding dateTimePicker1}" Format="FullDateTime" />-->
             </Grid>
         </GroupBox>
 

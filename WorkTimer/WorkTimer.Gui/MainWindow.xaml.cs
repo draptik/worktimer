@@ -89,7 +89,8 @@ namespace WorkTimer.Gui
             if (IsValidStartTime()) {
                 ucTimeCheckboxes.EnableVisibilityChecboxes(true);
                 try {
-                    ucClock.Init(new WorkTime(ucTimeAsText.tbTimeStart.Text), _config);
+                    //ucClock.Init(new WorkTime(ucTimeAsText.tbTimeStart.Text), _config);
+                    ucClock.Init(new WorkTime(ucTimeAsText.StartTime), _config);
                     UpdateClockDisplayTimes();
                 }
                 catch (Exception exception) {
@@ -106,7 +107,8 @@ namespace WorkTimer.Gui
             if (!IsValidStartTime()) { return; }
 
             try {
-                var workTime = new WorkTime(ucTimeAsText.tbTimeStart.Text);
+                //var workTime = new WorkTime(ucTimeAsText.tbTimeStart.Text);
+                var workTime = new WorkTime(ucTimeAsText.StartTime);
                 UpdateTextBoxes(workTime);
                 UpdateProgressGui(workTime);
                 UpdateTitle(workTime);
@@ -168,7 +170,8 @@ namespace WorkTimer.Gui
 
         private bool IsValidStartTime()
         {
-            return !ucTimeAsText.tbTimeStart.Text.IsNullOrEmpty();
+            return ucTimeAsText.StartTime.HasValue;
+            //return !ucTimeAsText.tbTimeStart.Text.IsNullOrEmpty();
         }
 
         private void ShowErrorDlg()

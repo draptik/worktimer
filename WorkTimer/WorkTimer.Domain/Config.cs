@@ -9,6 +9,7 @@ namespace WorkTimer.Domain
         #region Singleton
         
         private static Config _instance;
+        
         public static Config GetInstance()
         {
             return _instance ?? (_instance = new Config());
@@ -63,7 +64,12 @@ namespace WorkTimer.Domain
         public double TargetTimeNum { get; set; }
         public double MinTimeStartNum { get; set; }
         public double MaxTimeNum { get; set; }
-            
+
+        public TimeSpan MaxTimeSpan
+        {
+            get { return TimeSpan.FromHours(MaxTimeNum); }
+        }
+
         #endregion
     }
 }

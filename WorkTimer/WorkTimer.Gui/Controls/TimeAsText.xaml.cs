@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
+using Microsoft.Windows.Controls;
 using WorkTimer.Common;
 using WorkTimer.Domain;
 
@@ -23,6 +24,28 @@ namespace WorkTimer.Gui.Controls
             _config = config;
             _defaultBackground = gbTimes.Background;
             datePickerStartDate.Text = DateTime.Today.ToShortDateString();
+
+            //dateTimePicker1.Format = Microsoft.Windows.Controls.DateTimeFormat.FullDateTime;
+            //dateTimePicker1.Format = DateTimeFormat.Custom;
+            //dateTimePicker1.FormatString = "ddd, d. MMM yyyy HH:mm";
+            //dateTimePicker1.FormatString = "d. MMM yyyy HH:mm";
+
+            var now = DateTime.Now;
+            var dt = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0); 
+            dateTimePicker1.Value = dt;
+        }
+
+        public DateTime? StartTime
+        {
+            get
+            {
+                if (dateTimePicker1.Value.HasValue) {
+                    var dt = (DateTime) dateTimePicker1.Value;
+                    dt.AddSeconds(-((DateTime) dateTimePicker1.Value).Second);
+                    return dt;
+                }
+                return dateTimePicker1.Value;
+            }
         }
 
         public void UpdateTextBoxes(WorkTime workTime)
