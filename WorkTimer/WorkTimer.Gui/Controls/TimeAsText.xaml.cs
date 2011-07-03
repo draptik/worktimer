@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Windows.Media;
-using Microsoft.Windows.Controls;
 using WorkTimer.Common;
 using WorkTimer.Domain;
 
 namespace WorkTimer.Gui.Controls
 {
-    /// <summary>
-    /// Interaction logic for TimeAsText.xaml
-    /// </summary>
     public partial class TimeAsText
     {
         private Config _config;
@@ -24,11 +20,6 @@ namespace WorkTimer.Gui.Controls
             _config = config;
             _defaultBackground = gbTimes.Background;
             datePickerStartDate.Text = DateTime.Today.ToShortDateString();
-
-            //dateTimePicker1.Format = Microsoft.Windows.Controls.DateTimeFormat.FullDateTime;
-            //dateTimePicker1.Format = DateTimeFormat.Custom;
-            //dateTimePicker1.FormatString = "ddd, d. MMM yyyy HH:mm";
-            //dateTimePicker1.FormatString = "d. MMM yyyy HH:mm";
 
             var now = DateTime.Now;
             var dt = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0); 

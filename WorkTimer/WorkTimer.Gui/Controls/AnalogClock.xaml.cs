@@ -12,8 +12,6 @@ using Rect = WorkTimer.Gui.Shapes.Rect;
 namespace WorkTimer.Gui.Controls
 {
     /// <summary>
-    /// Interaction logic for AnalogClock.xaml
-    /// 
     /// http://www.codeproject.com/KB/WPF/WpfClock.aspx
     /// </summary>
     public partial class AnalogClock
@@ -41,7 +39,7 @@ namespace WorkTimer.Gui.Controls
         public void Update(WorkTime workTime, bool isChecked)
         {
             _timeSpentArc = new Arc(timeSpentPath, timeSpentStartOnCircle, timeSpentArc, _zeroPos, _config.TimeSpentColor);
-            _timeSpentArc.Update(workTime.StartTime, DateTime.Now, RadiusTimeSpent, workTime.TimeSpent > new TimeSpan(6, 0, 0));
+            _timeSpentArc.Update(workTime.StartTime, DateTime.Now, RadiusTimeSpent, workTime.TimeSpent > _config.MinTimeSpan);
             _timeSpentArc.Visibility = isChecked;
 
             lbClockTop.Content = "time spent: " + workTime.TimeSpent.ToDisplayString();
@@ -105,7 +103,7 @@ namespace WorkTimer.Gui.Controls
 
         private void InitMinTime(WorkTime workTime, double radius)
         {
-            var isLargeArc = workTime.MinTimeEnd.Subtract(workTime.MinTimeStart) > new TimeSpan(6, 0, 0);
+            var isLargeArc = workTime.MinTimeEnd.Subtract(workTime.MinTimeStart) > _config.MinTimeSpan;
             _minTimeArc = InitArc(minTimePath, minTimeStartOnCircle, minTimeArcSegment, workTime.MinTimeStart, workTime.MinTimeEnd, radius, isLargeArc, _config.MinTimeColor);
         }
 

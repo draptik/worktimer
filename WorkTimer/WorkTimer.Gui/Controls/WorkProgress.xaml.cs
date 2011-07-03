@@ -8,9 +8,6 @@ using Rect = WorkTimer.Gui.Shapes.Rect;
 
 namespace WorkTimer.Gui.Controls
 {
-    /// <summary>
-    /// Interaction logic for WorkProgress.xaml
-    /// </summary>
     public partial class WorkProgress
     {
         private Config _config;

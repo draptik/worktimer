@@ -67,10 +67,10 @@ namespace WorkTimer.Domain
         public double MinTimeStartNum { get; set; }
         public double MaxTimeNum { get; set; }
 
-        public TimeSpan MaxTimeSpan
-        {
-            get { return TimeSpan.FromHours(MaxTimeNum); }
-        }
+        public TimeSpan MaxTimeSpan { get { return TimeSpan.FromHours(MaxTimeNum); } }
+        public TimeSpan MinTimeSpan { get { return TimeSpan.FromHours(MinTimeStartNum); } }
+        public TimeSpan TargetTimeSpan { get { return TimeSpan.FromHours(TargetTimeNum); } }
+        public TimeSpan BreakTimeSpan { get { return TimeSpan.FromHours(BreakTimeNum); } }
 
         #endregion
     }

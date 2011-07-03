@@ -8,7 +8,6 @@ namespace WorkTimer.Domain
         #region Fields
 
         private readonly IClock _clock; // unit testing
-
         private readonly Config _config;
 
         #endregion
@@ -58,17 +57,17 @@ namespace WorkTimer.Domain
 
         public DateTime StartTime { get; private set; }
         public DateTime TargetTime { get; private set; }
-        public TimeSpan TargetTimeSpan { get { return new TimeSpan(8, 45, 0); } }
+        public TimeSpan TargetTimeSpan { get { return _config.TargetTimeSpan; } }
 
         public TimeSpan RemainingTillTarget { get; private set; }
 
         public TimeSpan TimeSpent { get; private set; }
 
-        public DateTime MinTimeStart { get { return StartTime.AddHours(6); } }
-        public DateTime MinTimeEnd { get { return StartTime.AddHours(6).AddMinutes(45); } }
+        public DateTime MinTimeStart { get { return StartTime.Add(_config.MinTimeSpan); } }
+        public DateTime MinTimeEnd { get { return StartTime.Add(_config.MinTimeSpan).Add(_config.BreakTimeSpan); } }
         public TimeSpan RemainingTillMinTime { get { return MinTimeStart.Subtract(_clock.Now); } }
 
-        public DateTime MaxTime { get { return StartTime.AddHours(10).AddMinutes(45); } }
+        public DateTime MaxTime { get { return StartTime.Add(_config.MaxTimeSpan); } }
         public TimeSpan RemainingTillMaxTime { get { return MaxTime.Subtract(_clock.Now); } }
 
         public TimeSpan Balance
@@ -76,17 +75,15 @@ namespace WorkTimer.Domain
             get
             {
                 var result = -RemainingTillTarget;
-                if (TimeSpent.TotalHours > 6 && TimeSpent.TotalHours < 6.75)
-                {
+                if (TimeSpent.TotalHours > _config.MinTimeStartNum && 
+                    TimeSpent.TotalHours < _config.MinTimeStartNum + _config.BreakTimeNum) {
                     result = new TimeSpan(-2, 0, 0);
                 }
-                else if (TimeSpent >= new TimeSpan(10, 45, 0))
-                {
+                else if (TimeSpent >= _config.MaxTimeSpan) {
                     result = new TimeSpan(2, 0, 0);
                 }
-                else if (TimeSpent.TotalHours <= 6)
-                {
-                    result = -RemainingTillTarget.Subtract(new TimeSpan(0, 45, 0));
+                else if (TimeSpent.TotalHours <= _config.MinTimeStartNum) {
+                    result = -RemainingTillTarget.Subtract(_config.BreakTimeSpan);
                 }
                 return result;
             }

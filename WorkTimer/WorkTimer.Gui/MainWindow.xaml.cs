@@ -7,9 +7,6 @@ using WorkTimer.Domain;
 
 namespace WorkTimer.Gui
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow
     {
 
@@ -89,7 +86,6 @@ namespace WorkTimer.Gui
             if (IsValidStartTime()) {
                 ucTimeCheckboxes.EnableVisibilityChecboxes(true);
                 try {
-                    //ucClock.Init(new WorkTime(ucTimeAsText.tbTimeStart.Text), _config);
                     ucClock.Init(new WorkTime(ucTimeAsText.StartTime), _config);
                     UpdateClockDisplayTimes();
                 }
@@ -107,7 +103,6 @@ namespace WorkTimer.Gui
             if (!IsValidStartTime()) { return; }
 
             try {
-                //var workTime = new WorkTime(ucTimeAsText.tbTimeStart.Text);
                 var workTime = new WorkTime(ucTimeAsText.StartTime);
                 UpdateTextBoxes(workTime);
                 UpdateProgressGui(workTime);
@@ -171,7 +166,6 @@ namespace WorkTimer.Gui
         private bool IsValidStartTime()
         {
             return ucTimeAsText.StartTime.HasValue;
-            //return !ucTimeAsText.tbTimeStart.Text.IsNullOrEmpty();
         }
 
         private void ShowErrorDlg()
