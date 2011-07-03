@@ -16,8 +16,8 @@ namespace WorkTimer.Gui.Controls
         private Config _config;
         private Rect _rectTimeSpent;
         private Rect _rectMinTime;
-        private Rect _rectMaxTime;
-        private Rect _rectTargetTime;
+        //private Rect _rectMaxTime;
+        private Line _lineTargetTime;
 
         public WorkProgress()
         {
@@ -56,7 +56,7 @@ namespace WorkTimer.Gui.Controls
         private void InitTargetLine(double targetTime)
         {
             var targetPos = GetPos(targetTime);
-            var line = new Line
+            _lineTargetTime = new Line
             {
                 Stroke = _config.TargetTimeBrush,
                 X1 = targetPos,
@@ -65,7 +65,7 @@ namespace WorkTimer.Gui.Controls
                 Y2 = GetHeightBottom(),
                 StrokeThickness = 2
             };
-            gridMain.Children.Add(line);
+            gridMain.Children.Add(_lineTargetTime);
         }
         
 
@@ -77,12 +77,13 @@ namespace WorkTimer.Gui.Controls
 
         public void ToggleMaxTimeDisplay(bool isChecked)
         {
-            if (_rectMaxTime != null) _rectMaxTime.Visibility = isChecked;
+            //if (_rectMaxTime != null) _rectMaxTime.Visibility = isChecked;
         }
 
         public void ToggleTargetTimeDisplay(bool isChecked)
         {
-            if (_rectTargetTime != null) _rectTargetTime.Visibility = isChecked;
+            if (_lineTargetTime != null)
+                _lineTargetTime.Visibility = isChecked ? Visibility.Visible : Visibility.Hidden;
         }
 
         public void ToggleTimeSpentDisplay(bool isChecked)

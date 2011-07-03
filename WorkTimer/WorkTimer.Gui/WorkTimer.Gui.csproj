@@ -94,9 +94,13 @@
     <Compile Include="Controls\TimeAsText.xaml.cs">
       <DependentUpon>TimeAsText.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TimeCheckboxes.xaml.cs">
+      <DependentUpon>TimeCheckboxes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\WorkProgress.xaml.cs">
       <DependentUpon>WorkProgress.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EventArgs\TimeCheckBoxesEventArgs.cs" />
     <Compile Include="Shapes\AbstractGuiObject.cs" />
     <Compile Include="Shapes\Arc.cs" />
     <Compile Include="Shapes\Rect.cs" />
@@ -107,6 +111,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\TimeAsText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimeCheckboxes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

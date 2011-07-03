@@ -23,6 +23,8 @@ namespace WorkTimer.Domain
         
         private void Init()
         {
+            TitleString = "Should I Stay Or Should I Go Now";
+
             MinTimeBrush = new SolidColorBrush { Color = Colors.YellowGreen };
             MaxTimeBrush = new SolidColorBrush { Color = Colors.RosyBrown };
             TargetTimeBrush = new SolidColorBrush { Color = Colors.SkyBlue };
@@ -39,8 +41,11 @@ namespace WorkTimer.Domain
             MaxTimeNum = 10.75;
         }
 
+        
 
         #region Properties
+
+        public string TitleString { get; set; }
 
         public CultureInfo CurrentCultureInfo { get; set; }
         public Brush MinTimeBrush { get; set; }
