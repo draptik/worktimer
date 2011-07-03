@@ -88,9 +88,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Config.cs" />
     <Compile Include="Controls\AnalogClock.xaml.cs">
       <DependentUpon>AnalogClock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TimeAsText.xaml.cs">
+      <DependentUpon>TimeAsText.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WorkProgress.xaml.cs">
       <DependentUpon>WorkProgress.xaml</DependentUpon>
@@ -103,6 +105,10 @@
     <Page Include="Controls\AnalogClock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TimeAsText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\WorkProgress.xaml">
       <Generator>MSBuild:Compile</Generator>

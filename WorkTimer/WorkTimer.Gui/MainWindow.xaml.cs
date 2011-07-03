@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Threading;
 using WorkTimer.Common;
 using WorkTimer.Domain;
@@ -21,25 +20,17 @@ namespace WorkTimer.Gui
         private WindowState _storedWindowState = WindowState.Normal;
 
         private DispatcherTimer _dispatcherTimer;
+        private Config _config;
         private const string TitleString = "Should I Stay Or Should I Go Now";
-
-        private readonly TimeSpan _warningTimeSpanMax = new TimeSpan(0, 30, 0);
-        private readonly Color _warnBackgroundColor = Colors.LightPink;
-        private readonly Color _okBackgroundColor = Colors.LightGreen;
-        private readonly Color _warnForgroundColor = Colors.Red;
-        private Brush _defaultBackground;
-
-        private const string TimeFormat = "H:mm";
-        private readonly CultureInfo _currentCultureInfo = new CultureInfo("de-DE");
 
         public DateTime? StartDateTime
         {
             get
             {
                 DateTime? result = null;
-                if (!tbTimeStart.Text.IsNullOrEmpty()) {
+                if (!ucTimeAsText.tbTimeStart.Text.IsNullOrEmpty()) {
                     DateTime startTime;
-                    if (DateTime.TryParseExact(tbTimeStart.Text, TimeFormat, _currentCultureInfo, DateTimeStyles.None, out startTime)) {
+                    if (DateTime.TryParseExact(ucTimeAsText.tbTimeStart.Text, _config.TimeFormat, _config.CurrentCultureInfo, DateTimeStyles.None, out startTime)) {
                         result = startTime;
                     }
                 }
@@ -54,7 +45,6 @@ namespace WorkTimer.Gui
         {
             InitTrayIcon();
             InitializeComponent();
-            InitStartDate();
         }
 
         #region Tray Icon
@@ -111,8 +101,9 @@ namespace WorkTimer.Gui
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ucProgress.Init(Config.GetInstance());
-            _defaultBackground = gbTimes.Background;
+            _config = Config.GetInstance();
+            ucTimeAsText.Init(_config);
+            ucProgress.Init(_config);
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -130,19 +121,13 @@ namespace WorkTimer.Gui
             }
             StartDispatcher();
         }
-
-        private void InitStartDate()
-        {
-            datePickerStartDate.Text = DateTime.Today.ToShortDateString();
-        }
-
-
+        
         private void InitClock()
         {
             if (IsValidStartTime()) {
                 EnableVisibilityChecboxes(true);
                 try {
-                    ucClock.Init(new WorkTime(tbTimeStart.Text), Config.GetInstance());
+                    ucClock.Init(new WorkTime(ucTimeAsText.tbTimeStart.Text), Config.GetInstance());
                     ucClock.ToggleMinTimeDisplay(cbMinTime.IsChecked.GetValueOrDefault());
                     ucClock.ToggleMaxTimeDisplay(cbMaxTime.IsChecked.GetValueOrDefault());
                     ucClock.ToggleTargetTimeDisplay(cbTargetTime.IsChecked.GetValueOrDefault());
@@ -180,7 +165,7 @@ namespace WorkTimer.Gui
             if (!IsValidStartTime()) { return; }
 
             try {
-                var workTime = new WorkTime(tbTimeStart.Text);
+                var workTime = new WorkTime(ucTimeAsText.tbTimeStart.Text);
                 UpdateTextBoxes(workTime);
                 UpdateProgressGui(workTime);
                 UpdateTitle(workTime);
@@ -204,16 +189,7 @@ namespace WorkTimer.Gui
 
         private void UpdateTextBoxes(WorkTime workTime)
         {
-            tbTimeTarget.Text = workTime.TargetTime.ToShortTimeString();
-            tbTimeTargetRemaining.Text = workTime.RemainingTillTarget.ToDisplayString();
-
-            tbMinTime.Text = workTime.MinTimeStart.ToShortTimeString();
-            tbMinTimeRemaining.Text = workTime.RemainingTillMinTime.ToDisplayString();
-
-            tbMaxTime.Text = workTime.MaxTime.ToShortTimeString();
-            tbMaxTimeRemaining.Text = workTime.RemainingTillMaxTime.ToDisplayString();
-
-            tbBalance.Text = workTime.Balance.ToDisplayString();
+            ucTimeAsText.UpdateTextBoxes(workTime);
         }
 
         private void UpdateProgressGui(WorkTime workTime)
@@ -229,22 +205,7 @@ namespace WorkTimer.Gui
 
         private void UpdateWarnings(WorkTime workTime)
         {
-            if (WarnIfMaxTimeReached(workTime)) {
-                gbTimes.Background = new SolidColorBrush(_warnBackgroundColor);
-                tbMaxTimeRemaining.Background = new SolidColorBrush(_warnBackgroundColor);
-            }
-            else {
-                gbTimes.Background = _defaultBackground;
-                tbMaxTimeRemaining.Background = new SolidColorBrush(_okBackgroundColor);
-            }
-
-            tbTimeTargetRemaining.Background = IsLessThanTargetTime(workTime)
-                                                   ? new SolidColorBrush(_warnBackgroundColor)
-                                                   : new SolidColorBrush(_okBackgroundColor);
-
-            tbMinTimeRemaining.Background = IsLessThanMinTime(workTime)
-                                                ? new SolidColorBrush(_warnBackgroundColor)
-                                                : new SolidColorBrush(_okBackgroundColor);
+            ucTimeAsText.UpdateWarnings(workTime);
         }
 
         private void UpdateTrayIcon(WorkTime workTime)
@@ -258,23 +219,7 @@ namespace WorkTimer.Gui
 
         private bool IsValidStartTime()
         {
-            return !tbTimeStart.Text.IsNullOrEmpty();
-        }
-
-        private bool WarnIfMaxTimeReached(WorkTime workTime)
-        {
-            return workTime.RemainingTillMaxTime < _warningTimeSpanMax;
-        }
-
-
-        private static bool IsLessThanMinTime(WorkTime workTime)
-        {
-            return workTime.RemainingTillMinTime.TotalSeconds > 0;
-        }
-
-        private static bool IsLessThanTargetTime(WorkTime workTime)
-        {
-            return workTime.RemainingTillTarget.TotalSeconds > 0;
+            return !ucTimeAsText.tbTimeStart.Text.IsNullOrEmpty();
         }
 
         private void ShowErrorDlg()

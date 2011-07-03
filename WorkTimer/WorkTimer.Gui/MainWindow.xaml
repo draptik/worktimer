@@ -1,7 +1,8 @@
 ﻿<Window x:Class="WorkTimer.Gui.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:WorkTimer="clr-namespace:WorkTimer.Gui" xmlns:Gui="clr-namespace:WorkTimer.Gui" xmlns:Controls="clr-namespace:WorkTimer.Gui.Controls" Title="Should I Stay Or Should I Go Now..." 
+        xmlns:WorkTimer="clr-namespace:WorkTimer.Gui" xmlns:Gui="clr-namespace:WorkTimer.Gui" xmlns:Controls="clr-namespace:WorkTimer.Gui.Controls" 
+        Title="Should I Stay Or Should I Go Now..." 
         Height="700" 
         Width="625" 
         Loaded="Window_Loaded" 
@@ -16,30 +17,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Row="0" Header="Zeiten" Height="130" HorizontalAlignment="Left" Margin="12,12,0,0" Name="gbTimes" VerticalAlignment="Top" Width="579">
-            <Grid>
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="120,8,0,0" Name="tbTimeStart" VerticalAlignment="Top" Width="60" HorizontalContentAlignment="Right" IsTabStop="True" KeyboardNavigation.TabIndex="0" />
-                <Label Content="Startzeit (HH:MM):" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lbTimeStart" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="320,40,0,0" Name="tbTimeTarget" VerticalAlignment="Top" Width="60" IsReadOnly="True" TextAlignment="Right" IsTabStop="False" />
-                <Label Content="Gehen (normal):" Height="28" HorizontalAlignment="Left" Margin="218,38,0,0" Name="lbTimeTarget" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="320,74,0,0" Name="tbTimeTargetRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
-                <Label Content="Restzeit (normal):" Height="28" HorizontalAlignment="Left" Margin="211,72,0,0" Name="lbTimeTargetRemaining" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="505,6,0,0" Name="tbBalance" VerticalAlignment="Top" Width="60" IsReadOnly="True" IsTabStop="False" />
-                <Label Content="Saldo:" Height="28" HorizontalAlignment="Left" Margin="457,6,0,0" Name="lbBalance" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="120,40,0,0" Name="tbMinTime" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
-                <Label Content="Gehen (min):" Height="28" HorizontalAlignment="Left" Margin="36,0,0,41" Name="lbMinTime" VerticalAlignment="Bottom" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="120,74,0,0" Name="tbMinTimeRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
-                <Label Content="Restzeit (min):" Height="28" HorizontalAlignment="Left" Margin="30,72,0,0" Name="lbMinTimeRemaining" VerticalAlignment="Top" />
-                <TextBox HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="503,40,0,44" Name="tbMaxTime" Width="60" IsReadOnly="True" IsTabStop="False" />
-                <Label Content="Gehen (max):" Height="28" HorizontalAlignment="Left" Margin="420,38,0,0" Name="lbMaxTime" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="505,74,0,0" Name="tbMaxTimeRemaining" TextAlignment="Right" VerticalAlignment="Top" Width="60" IsTabStop="False" />
-                <Label Content="Restzeit (max):" Height="28" HorizontalAlignment="Left" Margin="415,72,0,0" Name="lbMaxTimeRemaining" VerticalAlignment="Top" />
-                <DatePicker Height="25" HorizontalAlignment="Left" Margin="211,7,0,0" Name="datePickerStartDate" VerticalAlignment="Top" Width="115" />
-            </Grid>
-        </GroupBox>
 
+        <Controls:TimeAsText x:Name="ucTimeAsText" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
         <Controls:WorkProgress x:Name="ucProgress" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
-        
         <Controls:AnalogClock x:Name="ucClock" Grid.Row="1" Grid.ColumnSpan="2" />
 
         <CheckBox Name="cbMinTime" Content="Show Min time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="100,30,400,30" IsEnabled="False" IsChecked="True" Checked="cbMinTime_CheckChanged" Unchecked="cbMinTime_CheckChanged" />

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using WorkTimer.Domain;
 using Rect = WorkTimer.Gui.Shapes.Rect;
 
 namespace WorkTimer.Gui.Controls
@@ -12,11 +13,6 @@ namespace WorkTimer.Gui.Controls
     /// </summary>
     public partial class WorkProgress
     {
-        private const double BreakTime    = 0.75;
-        private const double TargetTime   = 8.75;
-        private const double MinTimeStart = 6.0;
-        private const double MaxTime      = 10.75;
-
         private Config _config;
         private Rect _rectTimeSpent;
         private Rect _rectMinTime;
@@ -32,8 +28,8 @@ namespace WorkTimer.Gui.Controls
         {
             _config = config;
             InitHourLines();
-            InitTargetLine(TargetTime);
-            InitMinTimes(MinTimeStart);
+            InitTargetLine(_config.TargetTimeNum);
+            InitMinTimes(_config.MinTimeStartNum);
         }
 
         public void UpdateCurrentPos(TimeSpan timeSpent)
@@ -51,7 +47,7 @@ namespace WorkTimer.Gui.Controls
             _rectMinTime = new Rect(rctMinTime)
                            {
                                Margin = SetElementPos(GetPos(minTimeStart), rctMinTime),
-                               Width = GetPos(BreakTime),
+                               Width = GetPos(_config.BreakTimeNum),
                                Visibility = true,
                                Color = _config.MinTimeBrush
                            };

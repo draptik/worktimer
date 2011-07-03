@@ -7,10 +7,40 @@ namespace WorkTimer.Domain
     {
         #region Fields
 
-        private const string TimeFormat = "H:mm";
-        private readonly CultureInfo _currentCultureInfo = new CultureInfo("de-DE");
-        
         private readonly IClock _clock; // unit testing
+
+        private Config _config;
+
+        #endregion
+
+        #region CTOR
+
+        public WorkTime(string startTimeString)
+            : this(new SystemClock(), startTimeString)
+        {
+        }
+
+        public WorkTime(IClock clock, string startTimeString)
+            : this(clock, startTimeString, null)
+        {
+        }
+
+        public WorkTime(IClock clock, string startTimeString, DateTime? startDate)
+        {
+            _config = Config.GetInstance();
+            _clock = clock; // unit testing 
+            
+            var validStartTime = ValidateStartTimeFormat(startTimeString);
+            var startDateTime = InitStartDateTime(validStartTime, startDate);
+            Init(startDateTime);
+        }
+
+        public WorkTime(IClock clock, DateTime startDateTime)
+        {
+            _config = Config.GetInstance();
+            _clock = clock; // unit testing 
+            Init(startDateTime);
+        }
 
         #endregion
 
@@ -54,33 +84,20 @@ namespace WorkTimer.Domain
 
         #endregion
 
-        #region CTOR
-
-        public WorkTime(string startTimeString) : this(new SystemClock(), startTimeString)
+        public bool WarnIfMaxTimeReached()
         {
+            return RemainingTillMaxTime < _config.WarningTimeSpanMax;
         }
 
-        public WorkTime(IClock clock, string startTimeString)
-            : this(clock, startTimeString, null)
+        public bool IsLessThanMinTime()
         {
+            return RemainingTillMinTime.TotalSeconds > 0;
         }
 
-        public WorkTime(IClock clock, string startTimeString, DateTime? startDate)
+        public bool IsLessThanTargetTime()
         {
-            _clock = clock; // unit testing 
-
-            var validStartTime = ValidateStartTimeFormat(startTimeString);
-            var startDateTime = InitStartDateTime(validStartTime, startDate);
-            Init(startDateTime);
+            return RemainingTillTarget.TotalSeconds > 0;
         }
-
-        public WorkTime(IClock clock, DateTime startDateTime)
-        {
-            _clock = clock; // unit testing 
-            Init(startDateTime);
-        }
-
-        #endregion
 
         #region Private
 
@@ -101,7 +118,7 @@ namespace WorkTimer.Domain
         private DateTime ValidateStartTimeFormat(string startTimeString)
         {
             DateTime startTime;
-            if (DateTime.TryParseExact(startTimeString, TimeFormat, _currentCultureInfo, DateTimeStyles.None, out startTime)) {
+            if (DateTime.TryParseExact(startTimeString, _config.TimeFormat, _config.CurrentCultureInfo, DateTimeStyles.None, out startTime)) {
                 return startTime;
             }
             throw new ArgumentException("Invalid start time! Required format: H:mm");
