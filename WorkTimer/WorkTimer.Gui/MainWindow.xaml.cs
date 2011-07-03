@@ -17,6 +17,9 @@ namespace WorkTimer.Gui
 
         #region Fields
 
+        private TrayIcon.ITrayIcon _trayIcon;
+        private WindowState _storedWindowState = WindowState.Normal;
+
         private DispatcherTimer _dispatcherTimer;
         private const string TitleString = "Should I Stay Or Should I Go Now";
 
@@ -28,7 +31,7 @@ namespace WorkTimer.Gui
 
         private const string TimeFormat = "H:mm";
         private readonly CultureInfo _currentCultureInfo = new CultureInfo("de-DE");
-        
+
         public DateTime? StartDateTime
         {
             get
@@ -49,76 +52,57 @@ namespace WorkTimer.Gui
 
         public MainWindow()
         {
+            InitTrayIcon();
             InitializeComponent();
             InitStartDate();
-            InitTrayIcon();
         }
 
         #region Tray Icon
 
-        private System.Windows.Forms.NotifyIcon TrayIcon { get; set; }
-
         private void InitTrayIcon()
         {
-            // http://possemeeg.wordpress.com/2007/09/06/minimize-to-tray-icon-in-wpf/
-            TrayIcon = new System.Windows.Forms.NotifyIcon
-            {
-                Icon = new System.Drawing.Icon(@"..\..\images\clock.ico"),
-                Visible = true,
-                BalloonTipTitle = @"WorkTimer",
-                BalloonTipText = @"Click the show...",
-                Text = @"The App..."
-
-            };
-
-            TrayIcon.Click       += TrayIcon_Click;
-            TrayIcon.DoubleClick += TrayIcon_DoubleClick;
+            _trayIcon = new TrayIcon.TrayIcon();
+            _trayIcon.Init();
+            _trayIcon.Icon.Click += trayIcon_ShowClicked;
+            _trayIcon.Icon.DoubleClick += trayIcon_DoubleClick;
         }
 
-        void TrayIcon_DoubleClick(object sender, EventArgs e)
+        void trayIcon_DoubleClick(object sender, EventArgs e)
         {
             Show();
             WindowState = WindowState.Normal;
         }
 
-        void TrayIcon_Click(object sender, EventArgs e)
+        void trayIcon_ShowClicked(object sender, EventArgs e)
         {
             Show();
             WindowState = _storedWindowState;
         }
 
-        void CheckTrayIcon()
-        {
-            ShowTrayIcon(!IsVisible);
-        }
-
-        void ShowTrayIcon(bool show)
-        {
-            if (TrayIcon != null)
-                TrayIcon.Visible = show;
-        }
-
         void OnClose(object sender, CancelEventArgs args)
         {
-            TrayIcon.Dispose();
-            TrayIcon = null;
+            _trayIcon.Close();
+            _trayIcon = null;
         }
 
-        private WindowState _storedWindowState = WindowState.Normal;
-        void OnStateChanged(object sender, EventArgs args)
+        void OnStateChanged(object sender, System.EventArgs args)
         {
             if (WindowState == WindowState.Minimized) {
                 Hide();
-                if (TrayIcon != null)
-                    TrayIcon.ShowBalloonTip(2000);
+                if (_trayIcon!= null && _trayIcon.Icon != null) {
+                    _trayIcon.Icon.ShowBalloonTip(2000);
+                }
             }
-            else
+            else {
                 _storedWindowState = WindowState;
+            }
         }
 
         void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
-            CheckTrayIcon();
+            if (_trayIcon != null && _trayIcon.Icon != null) {
+                _trayIcon.Icon.Visible = !IsVisible;
+            }
         }
 
         #endregion
@@ -171,7 +155,7 @@ namespace WorkTimer.Gui
             }
         }
 
-        void dispatcherTimer_Tick(object sender, EventArgs e)
+        void dispatcherTimer_Tick(object sender, System.EventArgs e)
         {
             Update();
         }
@@ -265,7 +249,7 @@ namespace WorkTimer.Gui
 
         private void UpdateTrayIcon(WorkTime workTime)
         {
-            TrayIcon.Text = workTime.TimeSpent.ToDisplayString();
+            _trayIcon.Icon.Text = workTime.TimeSpent.ToDisplayString();
         }
         
         #endregion

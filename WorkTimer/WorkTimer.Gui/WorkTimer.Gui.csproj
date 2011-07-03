@@ -98,6 +98,8 @@
     <Compile Include="Shapes\AbstractGuiObject.cs" />
     <Compile Include="Shapes\Arc.cs" />
     <Compile Include="Shapes\Rect.cs" />
+    <Compile Include="TrayIcon\ITrayIcon.cs" />
+    <Compile Include="TrayIcon\TrayIcon.cs" />
     <Page Include="Controls\AnalogClock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
