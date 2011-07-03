@@ -29,9 +29,9 @@
         <Controls:AnalogClock x:Name="ucClock" Grid.Row="2" Grid.Column="1" />
         
         <Controls:TimeCheckboxes x:Name="ucTimeCheckboxes" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" />
-        
-        <Button Grid.Row="4" Content="Start" Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="btnStart"  Width="75" Click="btnStart_Click" IsTabStop="True" KeyboardNavigation.TabIndex="1"  />
-        <Button Grid.Row="4" Content="Stop" Height="23" HorizontalAlignment="Left" Margin="100,0,0,0" Name="btnStop" VerticalAlignment="Top" Width="75" Click="btnStop_Click" IsEnabled="False" KeyboardNavigation.TabIndex="2"  />
-        <Button Grid.Row="4" Content="Exit" Height="23" HorizontalAlignment="Left" Margin="500,0,0,0" Name="btnExit" VerticalAlignment="Top" Width="75" Click="btnExit_Click" KeyboardNavigation.TabIndex="3"  />
+
+        <Button Grid.Row="4" Grid.Column="0" Content="Start" Height="23" HorizontalAlignment="Center" Name="btnStart"  Width="75" Click="btnStart_Click" IsTabStop="True" KeyboardNavigation.TabIndex="1"  />
+        <Button Grid.Row="4" Grid.Column="1" Content="Stop" Height="23" HorizontalAlignment="Left" Margin="5,0,0,0" Name="btnStop" VerticalAlignment="Center" Width="75" Click="btnStop_Click" IsEnabled="True" KeyboardNavigation.TabIndex="2"  />
+        <Button Grid.Row="4" Grid.Column="2" Content="Exit" Height="23" HorizontalAlignment="Left" Name="btnExit" VerticalAlignment="Center" Width="75" Click="btnExit_Click" KeyboardNavigation.TabIndex="3"  />
     </Grid>
 </Window>

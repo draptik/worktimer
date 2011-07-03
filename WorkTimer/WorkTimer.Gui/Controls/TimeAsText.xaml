@@ -27,7 +27,7 @@
                 <Label Content="Restzeit (max):" Height="28" HorizontalAlignment="Left" Margin="415,72,0,0" Name="lbMaxTimeRemaining" VerticalAlignment="Top" />
                 <DatePicker Height="25" HorizontalAlignment="Left" Margin="281,7,0,0" Name="datePickerStartDate" VerticalAlignment="Top" Width="45" Visibility="Hidden" />
                 <extToolkit:TimePicker HorizontalAlignment="Left" Margin="340,7,0,0" Name="timePickerStart" VerticalAlignment="Top" Width="94" Visibility="Hidden" />
-                <extToolkit:DateTimePicker HorizontalAlignment="Left" Margin="120,7,0,0" Name="dateTimePicker1" VerticalAlignment="Top" Width="260"  />
+                <extToolkit:DateTimePicker HorizontalAlignment="Left" Margin="120,7,0,0" Name="dateTimePicker1" VerticalAlignment="Top" Width="260" DataContextChanged="BlaChanged" />
                 <!--<extToolkit:DateTimeUpDown Value="{Binding dateTimePicker1}" Format="FullDateTime" />-->
             </Grid>
         </GroupBox>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using WorkTimer.Common;
 using WorkTimer.Domain;
@@ -13,6 +14,14 @@ namespace WorkTimer.Gui.Controls
         public TimeAsText()
         {
             InitializeComponent();
+        }
+
+        public event EventHandler<System.EventArgs> StartTimeChanged;
+
+        public void InvokeStartTimeChanged(System.EventArgs e)
+        {
+            var handler = StartTimeChanged;
+            if (handler != null) handler(this, e);
         }
 
         public void Init(Config config)
@@ -68,6 +77,11 @@ namespace WorkTimer.Gui.Controls
             tbMinTimeRemaining.Background = workTime.IsLessThanMinTime()
                                                 ? new SolidColorBrush(_config.WarnBackgroundColor)
                                                 : new SolidColorBrush(_config.OkBackgroundColor);
+        }
+
+        private void BlaChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            InvokeStartTimeChanged(new System.EventArgs());
         }
     }
 }
