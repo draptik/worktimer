@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace WorkTimer.Gui.Shapes
 {
@@ -32,6 +33,11 @@ namespace WorkTimer.Gui.Shapes
         public static double GetAngle(DateTime dateTime)
         {
             return dateTime.Hour * 30 + dateTime.Minute * 0.5;
+        }
+
+        public Brush ToBrush(Color color)
+        {
+            return new SolidColorBrush { Color = color };
         }
     }
 }

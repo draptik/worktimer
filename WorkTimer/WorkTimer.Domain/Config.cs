@@ -26,20 +26,22 @@ namespace WorkTimer.Domain
         {
             TitleString = "Should I Stay Or Should I Go Now";
 
-            MinTimeBrush = new SolidColorBrush { Color = Colors.YellowGreen };
-            MaxTimeBrush = new SolidColorBrush { Color = Colors.RosyBrown };
-            TargetTimeBrush = new SolidColorBrush { Color = Colors.SkyBlue };
-            TimeSpentBrush = new SolidColorBrush { Color = Colors.Aquamarine };
+            MinTimeColor        = Colors.YellowGreen;
+            MaxTimeColor        = Colors.RosyBrown;
+            TargetTimeColor     = Colors.SkyBlue;
+            TimeSpentColor      = Colors.Aquamarine;
             WarnBackgroundColor = Colors.LightPink;
-            OkBackgroundColor = Colors.LightGreen;
-            WarningTimeSpanMax = new TimeSpan(0, 30, 0);
-            CurrentCultureInfo = new CultureInfo("de-DE");
-            TimeFormat = "H:mm";
+            OkBackgroundColor   = Colors.LightGreen;
+            
+            WarningTimeSpanMax  = new TimeSpan(0, 30, 0);
+            CurrentCultureInfo  = new CultureInfo("de-DE");
+            
+            TimeFormat          = "H:mm";
 
-            BreakTimeNum = 0.75;
-            TargetTimeNum = 8.75;
+            BreakTimeNum    = 0.75;
+            TargetTimeNum   = 8.75;
             MinTimeStartNum = 6.0;
-            MaxTimeNum = 10.75;
+            MaxTimeNum      = 10.75;
         }
 
         
@@ -49,10 +51,10 @@ namespace WorkTimer.Domain
         public string TitleString { get; set; }
 
         public CultureInfo CurrentCultureInfo { get; set; }
-        public Brush MinTimeBrush { get; set; }
-        public Brush MaxTimeBrush { get; set; }
-        public Brush TargetTimeBrush { get; set; }
-        public Brush TimeSpentBrush { get; set; }
+        public Color MinTimeColor { get; set; }
+        public Color MaxTimeColor { get; set; }
+        public Color TargetTimeColor { get; set; }
+        public Color TimeSpentColor { get; set; }
         public Color WarnBackgroundColor { get; set; }
         public Color OkBackgroundColor { get; set; }
         

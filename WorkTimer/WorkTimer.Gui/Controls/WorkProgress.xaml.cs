@@ -40,7 +40,7 @@ namespace WorkTimer.Gui.Controls
 
             _rectTimeSpent = new Rect(rctCurrent)
                              {
-                                 Color = _config.TimeSpentBrush,
+                                 Color = _config.TimeSpentColor,
                                  Width = GetPos(timeSpent.TotalMinutes/60.0)
                              };
         }
@@ -53,7 +53,7 @@ namespace WorkTimer.Gui.Controls
                                Margin = SetElementPos(GetPos(minTimeStart), rctMinTime),
                                Width = GetPos(_config.BreakTimeNum),
                                Visibility = true,
-                               Color = _config.MinTimeBrush
+                               Color = _config.MinTimeColor
                            };
         }
 
@@ -62,7 +62,7 @@ namespace WorkTimer.Gui.Controls
             var targetPos = GetPos(targetTime);
             _lineTargetTime = new Line
             {
-                Stroke = _config.TargetTimeBrush,
+                Stroke = new SolidColorBrush {Color =_config.TargetTimeColor},
                 X1 = targetPos,
                 X2 = targetPos,
                 Y1 = GetHeightTop(),

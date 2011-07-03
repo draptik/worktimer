@@ -40,7 +40,7 @@ namespace WorkTimer.Gui.Controls
 
         public void Update(WorkTime workTime, bool isChecked)
         {
-            _timeSpentArc = new Arc(timeSpentPath, timeSpentStartOnCircle, timeSpentArc, _zeroPos, _config.TimeSpentBrush);
+            _timeSpentArc = new Arc(timeSpentPath, timeSpentStartOnCircle, timeSpentArc, _zeroPos, _config.TimeSpentColor);
             _timeSpentArc.Update(workTime.StartTime, DateTime.Now, RadiusTimeSpent, workTime.TimeSpent > new TimeSpan(6, 0, 0));
             _timeSpentArc.Visibility = isChecked;
 
@@ -95,24 +95,24 @@ namespace WorkTimer.Gui.Controls
             rect.Update(workTime.TargetTime);
             rect.Visibility = false;
             
-            _targetTimeArc = InitArc(targetTimePath, targetTimeStartOnCircle, targetTimeArc, workTime.StartTime, workTime.TargetTime, radius, true, _config.TargetTimeBrush);
+            _targetTimeArc = InitArc(targetTimePath, targetTimeStartOnCircle, targetTimeArc, workTime.StartTime, workTime.TargetTime, radius, true, _config.TargetTimeColor);
         }
 
         private void InitMaxTime(WorkTime workTime, double radius)
         {
-            _maxTimeArc = InitArc(maxTimePath, maxTimeStartOnCircle, maxTimeArc, workTime.TargetTime, workTime.MaxTime, radius, false, _config.MaxTimeBrush);
+            _maxTimeArc = InitArc(maxTimePath, maxTimeStartOnCircle, maxTimeArc, workTime.TargetTime, workTime.MaxTime, radius, false, _config.MaxTimeColor);
         }
 
         private void InitMinTime(WorkTime workTime, double radius)
         {
             var isLargeArc = workTime.MinTimeEnd.Subtract(workTime.MinTimeStart) > new TimeSpan(6, 0, 0);
-            _minTimeArc = InitArc(minTimePath, minTimeStartOnCircle, minTimeArcSegment, workTime.MinTimeStart, workTime.MinTimeEnd, radius, isLargeArc, _config.MinTimeBrush);
+            _minTimeArc = InitArc(minTimePath, minTimeStartOnCircle, minTimeArcSegment, workTime.MinTimeStart, workTime.MinTimeEnd, radius, isLargeArc, _config.MinTimeColor);
         }
 
         private Arc InitArc(Path path, LineSegment lineSegment, ArcSegment arcSegment, 
-            DateTime startTime, DateTime endTime, double radius, bool isLargeArc, Brush brush)
+            DateTime startTime, DateTime endTime, double radius, bool isLargeArc, Color color)
         {
-            var arc = new Arc(path, lineSegment, arcSegment, _zeroPos, brush);
+            var arc = new Arc(path, lineSegment, arcSegment, _zeroPos, color);
             arc.Update(startTime, endTime, radius, isLargeArc);
             return arc;
         }

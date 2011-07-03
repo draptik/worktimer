@@ -20,14 +20,14 @@ namespace WorkTimer.Gui.Shapes
             set { Path.Visibility = value ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden; }
         }
 
-        public Arc(Path path, LineSegment lineSegment, ArcSegment arcSegment, Point zeroPos, Brush brush)
+        public Arc(Path path, LineSegment lineSegment, ArcSegment arcSegment, Point zeroPos, Color color)
         {
             Path = path;
             LineSegment = lineSegment;
             ArcSegment = arcSegment;
             ZeroPos = zeroPos;
-            Path.Stroke = brush;
-            Path.Fill = brush;
+            Path.Stroke = ToBrush(color);
+            Path.Fill = ToBrush(color);
         }
 
         public void Update(DateTime startTime, DateTime endTime, double radius, bool isLargeArc)
