@@ -4,12 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <CheckBox Name="cbMinTime" Content="Show Min time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="100,30,400,30" IsEnabled="False" IsChecked="True" Checked="cbMinTime_CheckChanged" Unchecked="cbMinTime_CheckChanged" />
-        <CheckBox Name="cbMaxTime" Content="Show Max time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="100,10,400,10" IsEnabled="False" IsChecked="True" Checked="cbMaxTime_CheckChanged" Unchecked="cbMaxTime_CheckChanged" />
-        <CheckBox Name="cbTimeSpent" Content="Show current time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="250,30,200,30" IsEnabled="False" IsChecked="True" Checked="cbTimeSpent_CheckChanged" Unchecked="cbTimeSpent_CheckChanged"/>
-        <CheckBox Name="cbTargetTime" Content="Show target time" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="250,10,200,10" IsEnabled="False" IsChecked="True" Checked="cbTargetTime_CheckChanged" Unchecked="cbTargetTime_CheckChanged"/>
+             d:DesignHeight="40" d:DesignWidth="240">
+    <Grid Name="TimeCheckboxesName">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" ></RowDefinition>
+            <RowDefinition Height="20" ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"></ColumnDefinition>
+            <ColumnDefinition Width="120"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
+        <CheckBox Name="cbMinTime" Content="Show Min time" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" IsEnabled="False" IsChecked="True" Checked="cbMinTime_CheckChanged" Unchecked="cbMinTime_CheckChanged" />
+        <CheckBox Name="cbMaxTime" Content="Show Max time" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsEnabled="False" IsChecked="True" Checked="cbMaxTime_CheckChanged" Unchecked="cbMaxTime_CheckChanged" />
+        <CheckBox Name="cbTimeSpent" Content="Show current time" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" IsEnabled="False" IsChecked="True" Checked="cbTimeSpent_CheckChanged" Unchecked="cbTimeSpent_CheckChanged"/>
+        <CheckBox Name="cbTargetTime" Content="Show target time" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" IsEnabled="False" IsChecked="True" Checked="cbTargetTime_CheckChanged" Unchecked="cbTargetTime_CheckChanged"/>
     </Grid>
 </UserControl>

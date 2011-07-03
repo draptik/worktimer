@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="95" d:DesignWidth="420">
+             d:DesignHeight="50" d:DesignWidth="300">
     <Grid Name="gridMain">
-        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctMain" Stroke="Black" VerticalAlignment="Top" Width="400" />
-        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctCurrent" Stroke="YellowGreen" VerticalAlignment="Top" Width="0" Fill="YellowGreen" Opacity="0.5" />
-        <Rectangle Height="30" HorizontalAlignment="Left" Margin="0,10,0,0" Name="rctMinTime" Stroke="MediumBlue" VerticalAlignment="Top" Width="0" Fill="MediumBlue" Opacity="0.7" Visibility="Hidden" />
+        <Rectangle Height="30" HorizontalAlignment="Left"  Name="rctMain" Stroke="Black" VerticalAlignment="Top" Width="300" />
+        <Rectangle Height="30" HorizontalAlignment="Left"  Name="rctCurrent" Stroke="YellowGreen" VerticalAlignment="Top" Width="0" Fill="YellowGreen" Opacity="0.5" />
+        <Rectangle Height="30" HorizontalAlignment="Left"  Name="rctMinTime" Stroke="MediumBlue" VerticalAlignment="Top" Width="0" Fill="MediumBlue" Opacity="0.7" Visibility="Hidden" />
     </Grid>
 </UserControl>

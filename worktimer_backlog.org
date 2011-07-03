@@ -1,20 +1,23 @@
-* TODO ID 001: Checkboxes should also toggle progress bar
+* DONE [#A] ID 001: Checkboxes should also toggle progress bar
 ** DONE MinTime
-** TODO MaxTime
-** TODO TargetTime
+** DONE MaxTime
+** DONE TargetTime
 ** DONE Current Time
-* TODO ID 002: Create user control for time text boxes
-* TODO ID 003: Create user control for buttons
-* TODO ID 004: Create user control for checkboxes
-* TODO ID 005: Create Groupbox for checkboxes
-* DONE ID 006: Refactor to Projects
-* TODO ID 007: Let user choose all colors
+* DONE [#A] ID 002: Create user control for time text boxes
+* DONE [#C] ID 003: Create user control for buttons
+  Declined: Not needed
+* DONE [#C] ID 004: Create user control for checkboxes
+* TODO [#C] ID 005: Create Groupbox for checkboxes
+* DONE [#A] ID 006: Refactor to Projects
+* TODO [#B] ID 007: Customize: Let user choose all colors and times
 * TODO [#A] ID 008: Add "flashy" warning if user works too long
-* DONE ID 009: Add Config class
-* TODO ID 010: Take previous day as input before throwing "Future date" exception
-* DONE ID 011: Handle worktime passing dates
-* TODO ID 012: Add time below progress bar hour lines
-* TODO ID 013: Better Error checking for invalid input
-* TODO ID 014: Better Error Messages for invalid input
-* TODO ID 013: Better Error display for invalid input
+* DONE [#A] ID 009: Add Config class
+* DONE [#A] ID 010: Take previous day as input before throwing "Future date" exception
+  Done by passing DateTime instead of Time
+* DONE [#A] ID 011: Handle worktime passing dates
+* TODO [#C] ID 012: Add time below progress bar hour lines
+* TODO [#A] ID 013: Better Error checking for invalid input
+* TODO [#A] ID 014: Better Error Messages for invalid input
+* TODO [#A] ID 013: Better Error display for invalid input
+* TODO [#A] ID 014: change Clockbackground image
 
