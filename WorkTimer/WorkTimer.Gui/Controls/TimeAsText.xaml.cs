@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Media;
 using WorkTimer.Common;
 using WorkTimer.Domain;
@@ -23,6 +24,21 @@ namespace WorkTimer.Gui.Controls
             _config = config;
             _defaultBackground = gbTimes.Background;
             datePickerStartDate.Text = DateTime.Today.ToShortDateString();
+        }
+
+        public DateTime? StartDateTime
+        {
+            get
+            {
+                DateTime? result = null;
+                if (!tbTimeStart.Text.IsNullOrEmpty()) {
+                    DateTime startTime;
+                    if (DateTime.TryParseExact(tbTimeStart.Text, _config.TimeFormat, _config.CurrentCultureInfo, DateTimeStyles.None, out startTime)) {
+                        result = startTime;
+                    }
+                }
+                return result;
+            }
         }
 
         public void UpdateTextBoxes(WorkTime workTime)

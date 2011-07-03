@@ -153,7 +153,7 @@ namespace WorkTimer.Gui.Controls
         {
             var maxPos = rctMain.Width;
             var zeroPos = rctMain.Margin.Left;
-            return zeroPos + Math.Round(maxPos / MaxTime * d, 2, MidpointRounding.AwayFromZero);
+            return zeroPos + Math.Round(maxPos / _config.MaxTimeNum * d, 2, MidpointRounding.AwayFromZero);
         }
 
         private static Thickness SetElementPos(double pos, FrameworkElement element)
