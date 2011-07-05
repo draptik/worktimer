@@ -20,4 +20,4 @@
 * TODO [#A] ID 014: Better Error Messages for invalid input
 * TODO [#A] ID 013: Better Error display for invalid input
 * TODO [#A] ID 014: change Clockbackground image
-
+* TODO [#A] ID 015: Let user customize colors

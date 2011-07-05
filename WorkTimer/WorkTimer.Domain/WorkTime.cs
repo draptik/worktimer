@@ -91,11 +91,16 @@ namespace WorkTimer.Domain
 
         #endregion
 
-        public bool WarnIfMaxTimeReached()
+        public bool WarningTimeReached()
         {
             return RemainingTillMaxTime < _config.WarningTimeSpanMax;
         }
 
+        public bool TargetTimePassed()
+        {
+            return _clock.Now > TargetTime;
+        }
+        
         public bool IsLessThanMinTime()
         {
             return RemainingTillMinTime.TotalSeconds > 0;

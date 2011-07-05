@@ -61,7 +61,7 @@ namespace WorkTimer.Gui.Controls
 
         public void UpdateWarnings(WorkTime workTime)
         {
-            if (workTime.WarnIfMaxTimeReached()) {
+            if (workTime.WarningTimeReached()) {
                 gbTimes.Background = new SolidColorBrush(_config.WarnBackgroundColor);
                 tbMaxTimeRemaining.Background = new SolidColorBrush(_config.WarnBackgroundColor);
             }

@@ -18,6 +18,9 @@ namespace WorkTimer.Gui
         private DispatcherTimer _dispatcherTimer;
         private Config _config;
 
+        private DateTime? _lastWarning;
+        private bool _warningCancelled;
+
         #endregion
 
         #region CTOR
@@ -107,9 +110,9 @@ namespace WorkTimer.Gui
                 UpdateTextBoxes(workTime);
                 UpdateProgressGui(workTime);
                 UpdateTitle(workTime);
-                UpdateWarnings(workTime);
                 UpdateClock(workTime);
                 UpdateTrayIcon(workTime);
+                UpdateWarnings(workTime);
             }
             catch (Exception exception) {
                 ShowErrorDlg(exception.Message);
@@ -152,7 +155,44 @@ namespace WorkTimer.Gui
         private void UpdateWarnings(WorkTime workTime)
         {
             ucTimeAsText.UpdateWarnings(workTime);
-            //  TODO SHOMETHING REALLY FLASHY HERE
+
+            //  TODO SOMETHING REALLY FLASHY HERE
+
+            var showFlashyWarning = workTime.TargetTimePassed() &&
+                                    workTime.WarningTimeReached() &&
+                                    !_warningCancelled &&
+                                    LastWarningIntervalExpired();
+
+            if (showFlashyWarning) {
+                ShowWarningMsgBox(workTime);
+            }
+        }
+
+        private bool LastWarningIntervalExpired()
+        {
+            return !_lastWarning.HasValue ||
+                   (DateTime) _lastWarning > ((DateTime) _lastWarning).Add(_config.WarningTimeSpanInterval);
+        }
+
+        private void ShowWarningMsgBox(WorkTime workTime)
+        {
+            var msgBoxText = string.Format("Achtung: Ende in {0} Minuten!", workTime.RemainingTillMaxTime.ToDisplayString());
+            var caption = "Achtung!";
+            var buttons = MessageBoxButton.OKCancel;
+            var icon = MessageBoxImage.Warning;
+            var result = MessageBox.Show(msgBoxText, caption, buttons, icon);
+            switch (result) {
+                case MessageBoxResult.OK:
+                    _lastWarning = DateTime.Now;
+                    break;
+                case MessageBoxResult.Cancel:
+                    _lastWarning = DateTime.Now;
+                    _warningCancelled = true;
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         private void UpdateTrayIcon(WorkTime workTime)

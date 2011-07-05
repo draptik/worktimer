@@ -9,7 +9,7 @@ namespace WorkTimer.Domain
         #region Singleton
         
         private static Config _instance;
-        
+
         public static Config GetInstance()
         {
             return _instance ?? (_instance = new Config());
@@ -33,8 +33,10 @@ namespace WorkTimer.Domain
             WarnBackgroundColor = Colors.LightPink;
             OkBackgroundColor   = Colors.LightGreen;
             
-            WarningTimeSpanMax  = new TimeSpan(0, 30, 0);
-            CurrentCultureInfo  = new CultureInfo("de-DE");
+            WarningTimeSpanMax       = new TimeSpan(0, 30, 0);
+            WarningTimeSpanInterval  = new TimeSpan(0, 0, 5);
+
+            CurrentCultureInfo = new CultureInfo("de-DE");
 
             TimeFormat = "H:mm";
 
@@ -42,6 +44,7 @@ namespace WorkTimer.Domain
             TargetTimeNum   = 8.75;
             MinTimeStartNum = 6.0;
             MaxTimeNum      = 10.75;
+            
         }
 
         
@@ -59,6 +62,7 @@ namespace WorkTimer.Domain
         public Color OkBackgroundColor { get; set; }
         
         public TimeSpan WarningTimeSpanMax { get; set; }
+        public TimeSpan WarningTimeSpanInterval { get; set; }
         
         public string TimeFormat { get; set; }
 
@@ -66,7 +70,7 @@ namespace WorkTimer.Domain
         public double TargetTimeNum { get; set; }
         public double MinTimeStartNum { get; set; }
         public double MaxTimeNum { get; set; }
-
+        
         public TimeSpan MaxTimeSpan { get { return TimeSpan.FromHours(MaxTimeNum); } }
         public TimeSpan MinTimeSpan { get { return TimeSpan.FromHours(MinTimeStartNum); } }
         public TimeSpan TargetTimeSpan { get { return TimeSpan.FromHours(TargetTimeNum); } }
